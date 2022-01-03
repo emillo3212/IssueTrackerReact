@@ -1,0 +1,13 @@
+.topBar {
+  background-color: #00a3ff;
+  width: 100%;
+  height: 80px;
+}
+.logo {
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  float: left;
+  margin-left: 50px;
+  margin-top: 10px;
+}
