@@ -1,0 +1,104 @@
+.ticketModal{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 640px;
+    height: 500px;
+    background-color: #191b1d;
+    color: white;
+    border-radius: 50px;
+ 
+}
+
+.ticketModalContent{
+    position: relative;
+    
+}
+
+.ticketModalName{
+    text-align: center;
+    margin: 10px 35px 0px;
+    font-size: 28px;
+    font-weight: bold;
+}
+.ticketModalDescription{
+    float: left;
+    margin: 0px 25px;
+    padding: 10px 25px;
+    width: 270px;
+    height: 210px;
+    border-radius: 25px;
+}
+.detailsHeader{
+    float: left;
+    font-size: 18px;
+    text-align: center;
+    margin: 20px 0px 0px 0px ;
+    width: 360px;
+    
+}
+.ticketModalCreatedBy{
+    float: left;
+    background-color: #1f2224;
+    margin: 10px 25px 25px 25px;
+    padding: 10px;
+    width: 200px;
+    border-radius: 25px;
+}
+.createdByHeader{
+
+    margin: 20px 0px 5px 45px;
+    font-size: 18px;
+
+}
+.ticketModalAssignedTo{
+    padding: 10px;
+    background-color: #00a3ff;
+    width: 200px;
+    margin: 10px 25px 25px 25px;
+    border-radius: 25px;
+    float: left;
+}
+
+.assignedToHeader{
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.ticketModalPriority{
+    padding: 10px;
+    background-color: #00b552;
+    width: 200px;
+    margin: 10px 25px 25px 25px;
+    border-radius: 25px;
+    float: left;
+}
+.priorityHeader{
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.deleteTicketBtn{
+    margin-top: 20px 30px 0px 0px;
+    height: 50px;
+    width: 150px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #FF5E62;
+    border:0;
+    border-radius: 25px;
+    color: white;
+
+}
+.doneTicketBtn{
+    margin: 20px 0px 0px 30px;
+    height: 50px;
+    width: 150px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #00a3ff;
+    border:0;
+    border-radius: 25px;
+    color: white;
+}

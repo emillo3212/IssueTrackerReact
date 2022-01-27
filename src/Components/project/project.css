@@ -26,13 +26,13 @@
   border-radius: 25px;
   font-size: 16px;
 }
-.tickets {
+.ticketss {
   display: table-cell;
   color: white;
   width: 60%;
   float: right;
 }
-.ticket {
+.tickett {
   margin: 20px 10px;
   padding: 5px;
   background-color: #2f353a;

@@ -1,0 +1,46 @@
+.usersInProject{
+    float: left;
+    width: 18%;
+    background-color: #24282B;
+    border-radius: 25px;
+    padding: 15px;
+    margin-top: 25px;
+    color: white;
+    height: 55%;
+    position: relative;
+  
+}
+.usersHeader{
+    padding-bottom: 15px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #1f2224;
+}
+.user{
+    padding: 10px;
+    margin: 10px;
+    border-radius: 25px;
+    background-color: #1f2224;
+}
+.addUserToProject{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin: 20px auto;
+   
+
+}
+.addUserBtn{
+    padding: 10px;
+    border-radius: 25px;
+    cursor: pointer;
+
+    
+}
+.addUserBtn:hover{
+    background-color: #1f2224 ;
+}

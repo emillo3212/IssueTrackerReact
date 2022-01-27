@@ -2,6 +2,8 @@ import {useState} from 'react'
 import './App.css';
 import Header from './Components/header/Header'
 import Projects from './Components/project/Projects'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import ProjectPage from './Pages/ProjectPage'
 
 const App = () => {
 
@@ -53,7 +55,7 @@ const App = () => {
     },
     {
       id: 2,
-      name:'project 1',
+      name:'project 2',
       description: 'description and that is great and this operate in many different ways',
       users: [
         {
@@ -92,10 +94,22 @@ const App = () => {
   ])
 
   return (
-    <div className="App">
-      <Header/>
-      <Projects projects={projects} />
-    </div>
+    <Router>
+      <div className="App">
+        <Header/>
+
+        <Switch>
+          <Route exact path="/">
+            <Projects projects={projects} />
+          </Route>
+          <Route path={"/:name"}>
+            <ProjectPage />
+          </Route>
+        </Switch>
+      
+      </div>
+    </Router>
+    
   );
 }
 
