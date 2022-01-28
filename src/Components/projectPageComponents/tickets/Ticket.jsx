@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import { FaMinus } from 'react-icons/fa'
 import {MdDone,MdSignalCellular1Bar,MdSignalCellular4Bar} from 'react-icons/md'
 import TicketModal from './TicketModal';
@@ -7,41 +8,38 @@ const Ticket = ({ticket,onClick}) => {
    
   return(<>
     
-    <div className='ticket' onClick={()=>onClick(ticket)}>
-        
-        <div className="ticketDone">
-        {ticket.Done ? <MdDone size={20}/> : <FaMinus size={20}/>}
-            <span class="tooltipText">Done</span>    
-        </div>
+    <Container className='ticket' onClick={()=>onClick(ticket)}>
+        <Row>
+            <Col md={1} className="ticketDone">
+                {ticket.Done ? <MdDone size={20}/> : <FaMinus size={20}/>}
+                <span class="tooltipText">Done</span> 
+            </Col>
 
-        <div className="ticketCreated">
-            {ticket.Created}
-            <span class="tooltipText">Created</span>   
-        </div>
+            <Col md={1} className="ticketCreated">
+                {ticket.Created}
+                <span class="tooltipText">Created</span>   
+            </Col>
 
-        <div className="ticketName">{ticket.Name}
-            <span class="tooltipText">Name of ticket</span>
-        </div>
-        
-        <div className="ticketCreatedBy">
-            {ticket.CreatedBy}
-            <span class="tooltipText">Created By</span>
-        </div>
-        <div className="ticketAssignTo">
-            {ticket.AssignedTo}
-            <span class="tooltipText">Assigned To</span>
-        </div>
-        <div className="ticketPriority">
-            <span style={{marginRight:10}}>{ticket.Priority} </span>
+            <Col  md={3} className="ticketName">{ticket.Name}
+                <span class="tooltipText">Name of ticket</span>
+            </Col>
             
-            <span class="tooltipText">Priority</span>
-        </div>
-        <div className="ticketPriorityIcon">
-            <MdSignalCellular1Bar size={20} color='#00ebb8'/>
-            <span class="tooltipText">Priority</span>
-        </div>
-       
-    </div>
+            <Col  className="ticketCreatedBy">
+                {ticket.CreatedBy}
+                <span class="tooltipText">Created By</span>
+            </Col>
+            <Col className="ticketAssignTo">
+                {ticket.AssignedTo}
+                <span class="tooltipText">Assigned To</span>
+            </Col>
+            <Col className="ticketPriority">
+                <span>{ticket.Priority} </span>
+                <MdSignalCellular1Bar className='ticketPriorityIcon' size={20} color='#00ebb8'/>
+                <span class="tooltipText">Priority</span>
+            </Col>
+        </Row>
+    
+    </Container>
 
    
   </>

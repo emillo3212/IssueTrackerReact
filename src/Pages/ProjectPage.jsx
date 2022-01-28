@@ -1,10 +1,18 @@
 import React, { useState,useEffect,useRef } from 'react'
-import './projectPage.css'
+
+import {AiOutlineUserAdd} from 'react-icons/ai'
 import {FaPlus} from "react-icons/fa"
 import Tickets from '../Components/projectPageComponents/tickets/Tickets'
 import Users from '../Components/projectPageComponents/users/Users'
 import TicketModal from '../Components/projectPageComponents/tickets/TicketModal'
 import UsersModal from '../Components/projectPageComponents/users/UsersModal'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import {Col, Container, Row} from 'react-bootstrap'
+
+import './projectPage.css'
+import '../Components/projectPageComponents/users/user.css'
+import { MdGrid3X3 } from 'react-icons/md'
 
 const ProjectPage = () => {
     const [tickets,setTickets] = useState([
@@ -84,22 +92,57 @@ const ProjectPage = () => {
    
 
     return (
+        
+        <Container fluid>
+            
+            <Row style={{marginRight:1}} className='justify-content-xl-center'>
+                <Col lg={9} xl={8} className='mx-xl-3'>
+                    <Tickets tickets = {tickets} onClick={showTicketModal} />
+                </Col>
+                <Col lg={3}>
+                    <Row>
+                        <div className='projectsInfo'>
+                            <div className='projectTittle'>Project number 1</div>
+                            <div className='projectDescription'>
+                                Bardzo super project który jest the best mowie ci
+                                Bardzo super project który jest the best mowie ci
+                                Bardzo super project który jest the best mowie ci
+                                Bardzo super project który jest the best mowie ci
+                                </div>
+                        </div>
+                    </Row>
 
-        <div className="content"> 
-            <Tickets tickets = {tickets} onClick={showTicketModal} />
+                    <Row>
+                        <div className='usersInProject'>
+                            <Users users = {users} />
+                            <div className="addUserToProject"><AiOutlineUserAdd onClick={showAddUserModal} className='addUserBtn' size={80} color='#00ebb8'/></div>
+                        </div>
+                        
+                    </Row>
+                    <Row>
+                        
+                    </Row>
+                   
+                    <Row>
+                        <div className="addTicketToProject">
+                            <button className="addTicketBtn">
+                                
+                                Create new Ticket
+                            </button>
+                            
+                        </div>
+                    </Row>
+                    
+                </Col>
 
-            <Users users = {users} onClick = {showAddUserModal}/>
-
-            <div className="addTicketToProject">
-                <button className="addTicketBtn">
-                    <FaPlus size={85}/>
-                    <span className='tooltiptext'>Create new Ticket</span>
-                </button>
+               
+                {(ticketModal)&& <div ref={ticketRef} ><TicketModal  ticket={ticket} /></div>}
+                {(addUserModal)&& <div><UsersModal/></div>}
+            </Row>
                 
-            </div>
-            {(ticketModal)&& <div ref={ticketRef} ><TicketModal  ticket={ticket} /></div>}
-            {(addUserModal)&& <div><UsersModal/></div>}
-        </div>
+           
+        </Container>
+       
     )
 }
 
