@@ -14,6 +14,8 @@ import './projectPage.css'
 import '../Components/projectPageComponents/users/user.css'
 import { MdGrid3X3 } from 'react-icons/md'
 
+import SimpleBar from 'simplebar-react'
+
 const ProjectPage = () => {
     const [tickets,setTickets] = useState([
         {
@@ -49,14 +51,54 @@ const ProjectPage = () => {
             Name:'Adam Małysz',
         },
         {
-            Id: 1,
+            Id: 3,
             Name:'Wojtek Wojtaszewski',
         },
         {
-            Id: 1,
+            Id: 4,
             Name:'Adam Hiller',
         },
     ])
+
+    const [lista,setLista] = useState([
+        {
+          Id:1,
+          Name:'Stefan Stefanowski',
+        },
+        {
+          Id:2,
+          Name:'Alan Alanowski',
+        },
+        {
+          Id:3,
+          Name:'Kamil Kamilowski',
+        },
+        {
+          Id:4,
+          Name:'Adrian Adrianowski',
+        },
+        {
+          Id:5,
+          Name:'Mikołaj Mikołajewski',
+        },
+        {
+          Id:6,
+          Name:'Wojtek Wojtyła',
+        },
+        {
+          Id:7,
+          Name:'Paweł Pawłowski',
+        },
+        {
+          Id:8,
+          Name:'Monika Monikowska',
+        },
+        {
+          Id:9,
+          Name:'Krzystof Krzystowski',
+        },
+    
+      ]);
 
     const ticketRef = useRef()
 
@@ -64,15 +106,21 @@ const ProjectPage = () => {
         const handler = (event) => {
             if(!ticketRef.current.contains(event.target)){
                 setTicketModal(false)
+                setAddUserModal(false)
             }
-     }
+        }
+
         document.addEventListener("mousedown",handler)
 
         return () =>{
             document.removeEventListener("mousedown", handler)
         }
 
+    },{
+        
     })
+
+  
     
     const [ticketModal,setTicketModal] = useState(false)
     const [ticket,setTicket] = useState([]) 
@@ -85,11 +133,24 @@ const ProjectPage = () => {
     const [addUserModal,setAddUserModal] = useState(false)
     const [usersList,setUsersList] = useState([])
 
-    const showAddUserModal = (userslist) =>{
+    const showAddUserModal = () =>{
         setAddUserModal(!addUserModal)
-        setUsersList(userslist)
+        setUsersList([])
     }
-   
+    const addUsersToList = (dodany) =>{
+        setUsersList([...usersList,dodany])
+        console.log(users)
+    }
+    const updateUsers = () => {
+      setUsers([...users,...usersList])
+      setAddUserModal(!addUserModal)
+      setUsersList([])
+    }
+
+    const deleteUserFromList = (user) =>{
+        const list = usersList.filter(item => item.Name !== user )
+        setUsersList(list)
+    }
 
     return (
         
@@ -114,14 +175,16 @@ const ProjectPage = () => {
 
                     <Row>
                         <div className='usersInProject'>
-                            <Users users = {users} />
-                            <div className="addUserToProject"><AiOutlineUserAdd onClick={showAddUserModal} className='addUserBtn' size={80} color='#00ebb8'/></div>
+                        <div className="usersHeader">Assigned</div>
+                            <SimpleBar style={{maxHeight:255}} >
+                                <Users users = {users} />
+                            </SimpleBar>
+                            
+                            <div className="addUserToProject"><AiOutlineUserAdd onClick={showAddUserModal} style={{margin:5}} className='addUserBtn' size={80} color='#00ebb8'/></div>
                         </div>
                         
                     </Row>
-                    <Row>
-                        
-                    </Row>
+                   
                    
                     <Row>
                         <div className="addTicketToProject">
@@ -134,10 +197,10 @@ const ProjectPage = () => {
                     </Row>
                     
                 </Col>
-
+               
                
                 {(ticketModal)&& <div ref={ticketRef} ><TicketModal  ticket={ticket} /></div>}
-                {(addUserModal)&& <div><UsersModal/></div>}
+                {(addUserModal)&& <div ref={ticketRef}><UsersModal lista={lista} addUsersToList={addUsersToList} updateUsers={updateUsers} deleteUserFromList={deleteUserFromList} /></div>}
             </Row>
                 
            

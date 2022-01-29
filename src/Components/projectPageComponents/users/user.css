@@ -3,6 +3,7 @@
   border-radius: 25px;
   color: white;
   margin-bottom: 10px;
+  max-height: 410px;
 }
 .usersHeader {
   font-size: 23px;
@@ -14,7 +15,7 @@
 .user {
   font-size: 15px;
   padding: 10px;
-  margin: 5px;
+  margin: 7px;
   border-radius: 25px;
   background-color: #1f2224;
 }

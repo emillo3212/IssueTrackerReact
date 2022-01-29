@@ -5,7 +5,7 @@ import './user.css'
 
 const Users = ({users}) => {
   return <>
-    <div className="usersHeader">Assigned</div>
+    
 
     {users.map((user)=>(
         <User key={user.Id} user={user}/>

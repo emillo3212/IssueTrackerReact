@@ -19,11 +19,12 @@
 }
 .usersModalSearchInput {
   font-size: 20px;
-  background-color: #1e2022;
+  background-color: #24282b;
   color: white;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   border-radius: 25px;
   border: 0;
+  padding: 11px;
 }
 .userFromList {
   position: relative;
@@ -31,4 +32,23 @@
   margin-bottom: 10px;
   background-color: #1f2224;
   border-radius: 20px;
+}
+.userFromList:hover {
+  background-color: #292d30;
+  cursor: pointer;
+}
+
+.usersBackground {
+  background-color: #24282b;
+  height: 280px;
+  border-radius: 25px;
+}
+.scroll {
+  height: 275px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+.simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
+  background-color: #22aeff;
 }

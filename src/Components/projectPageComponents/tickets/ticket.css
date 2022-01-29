@@ -3,7 +3,7 @@
   color: white;
   border-radius: 25px;
   padding: 10px;
-  height: 87vh;
+  max-height: 87vh;
   font-size: 14px;
   font-weight: 600;
 }
@@ -18,7 +18,7 @@
   padding: 5px;
   background-color: #1f2224;
   border-radius: 25px;
-  margin-bottom: 5px;
+  margin: 10px;
 }
 .ticket:hover {
   background-color: #292d30;
