@@ -15,6 +15,7 @@ import '../Components/projectPageComponents/users/user.css'
 import { MdGrid3X3 } from 'react-icons/md'
 
 import SimpleBar from 'simplebar-react'
+import CreateTicketModal from '../Components/projectPageComponents/tickets/CreateTicketModal'
 
 const ProjectPage = () => {
     const [tickets,setTickets] = useState([
@@ -120,8 +121,6 @@ const ProjectPage = () => {
         
     })
 
-  
-    
     const [ticketModal,setTicketModal] = useState(false)
     const [ticket,setTicket] = useState([]) 
 
@@ -137,10 +136,12 @@ const ProjectPage = () => {
         setAddUserModal(!addUserModal)
         setUsersList([])
     }
+
     const addUsersToList = (dodany) =>{
         setUsersList([...usersList,dodany])
         console.log(users)
     }
+
     const updateUsers = () => {
       setUsers([...users,...usersList])
       setAddUserModal(!addUserModal)
@@ -151,6 +152,19 @@ const ProjectPage = () => {
         const list = usersList.filter(item => item.Name !== user )
         setUsersList(list)
     }
+
+    const [createTicketModal,setCreateTicketModal] = useState(false)
+
+    const showCreateTicketModal = () =>{
+        setCreateTicketModal(!createTicketModal)
+    }
+
+    const [userAssigned,setUserAssigned] = useState([])
+
+    const assignUser = (selectedUser) => {
+        setUserAssigned(selectedUser)
+    }
+    
 
     return (
         
@@ -182,27 +196,24 @@ const ProjectPage = () => {
                             
                             <div className="addUserToProject"><AiOutlineUserAdd onClick={showAddUserModal} style={{margin:5}} className='addUserBtn' size={80} color='#00ebb8'/></div>
                         </div>
-                        
                     </Row>
-                   
-                   
+                
                     <Row>
                         <div className="addTicketToProject">
-                            <button className="addTicketBtn">
+                            <button onClick={showCreateTicketModal} className="addTicketBtn">
                                 
                                 Create new Ticket
                             </button>
                             
                         </div>
                     </Row>
-                    
                 </Col>
-               
                
                 {(ticketModal)&& <div ref={ticketRef} ><TicketModal  ticket={ticket} /></div>}
                 {(addUserModal)&& <div ref={ticketRef}><UsersModal lista={lista} addUsersToList={addUsersToList} updateUsers={updateUsers} deleteUserFromList={deleteUserFromList} /></div>}
+                {(createTicketModal)&& <div><CreateTicketModal listaUsers={users} assignUser={assignUser}/></div>}
             </Row>
-                
+               
            
         </Container>
        

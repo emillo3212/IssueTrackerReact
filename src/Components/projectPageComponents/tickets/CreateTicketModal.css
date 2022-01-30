@@ -1,0 +1,39 @@
+.createTicketModal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 680px;
+  height: 600px;
+  background-color: #191b1d;
+  color: white;
+  border-radius: 50px;
+  padding: 5px 40px 10px 25px;
+}
+.createTicketHeader {
+  margin: 10px;
+  font-size: 28px;
+  font-weight: bold;
+}
+.createTicketTittle {
+  font-size: 20px;
+  margin: 10px 0px 0px 20px;
+  text-align: left;
+}
+.createTicketTitleInput {
+  font-size: 15px;
+  background-color: #24282b;
+  color: white;
+  margin-bottom: 20px;
+  border-radius: 25px;
+  border: 0;
+  padding: 10px;
+  margin-left: 20px;
+}
+.createTicketAddUsers {
+  background-color: #24282b;
+  padding: 15px;
+  border-radius: 25px;
+}
