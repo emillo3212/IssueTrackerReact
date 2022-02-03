@@ -4,6 +4,7 @@ import Header from './Components/header/Header'
 import Projects from './Components/project/Projects'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import ProjectPage from './Pages/ProjectPage'
+import HomePage from './Pages/HomePage';
 
 const App = () => {
 
@@ -100,7 +101,7 @@ const App = () => {
 
         <Switch>
           <Route exact path="/">
-            <Projects projects={projects} />
+            <HomePage projects={projects} />
           </Route>
           <Route path={"/:name"}>
             <ProjectPage />

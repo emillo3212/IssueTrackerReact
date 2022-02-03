@@ -20,17 +20,17 @@ import CreateTicketModal from '../Components/projectPageComponents/tickets/Creat
 const ProjectPage = () => {
     const [tickets,setTickets] = useState([
         {
-            id: 1,
+            Id: 1,
             Name: 'Create login page',
             Description: 'Page should contain \n -login \n -password \n -confirm password \n -button to login \n and link to registration page',
             Created:  '21.03.2022   21:20',
             CreatedBy: 'Jorgee Ulani',
             AssignedTo: 'Maks Kolanko',
-            Priority: 'low',
+            Priority: 'Low',
             Done: false,
         },
         {
-            id: 2,
+            Id: 2,
             Name: 'Design homePage',
             Description: 'ask Thomas about more details',
             Created: '22.03.2022    13:42',
@@ -108,6 +108,7 @@ const ProjectPage = () => {
             if(!ticketRef.current.contains(event.target)){
                 setTicketModal(false)
                 setAddUserModal(false)
+                setCreateTicketModal(false)
             }
         }
 
@@ -164,7 +165,34 @@ const ProjectPage = () => {
     const assignUser = (selectedUser) => {
         setUserAssigned(selectedUser)
     }
+
+    const addTicket = (newTicket) => {
+        
+        newTicket[0].Id = tickets.length+1;
+        setTickets([...tickets,...newTicket])
+        setCreateTicketModal(!createTicketModal)
+        console.log(newTicket.Id)
+        console.log(tickets)
+    }
     
+    const DoneTicket = (ticket) => {
+        var getTickets = [...tickets]
+        var done = ticket.Done
+        ticket.Done=!done
+        
+        var index = tickets.find((o)=>o.id===ticket.Id)
+        let updateTicket = {...getTickets[index]};
+        updateTicket = ticket
+        getTickets[index] = updateTicket
+
+        setTickets(getTickets)
+        setTicketModal(false)
+    }
+    const DeleteTicket = (ticket) =>{
+        var ticketToDelete = tickets.filter(t=>t.Id!==ticket.Id)
+        setTickets(ticketToDelete)
+        setTicketModal(!ticketModal)
+    }
 
     return (
         
@@ -172,7 +200,7 @@ const ProjectPage = () => {
             
             <Row style={{marginRight:1}} className='justify-content-xl-center'>
                 <Col lg={9} xl={8} className='mx-xl-3'>
-                    <Tickets tickets = {tickets} onClick={showTicketModal} />
+                    <Tickets tickets = {tickets} onClick={showTicketModal} DoneTicket={DoneTicket} />
                 </Col>
                 <Col lg={3}>
                     <Row>
@@ -190,7 +218,7 @@ const ProjectPage = () => {
                     <Row>
                         <div className='usersInProject'>
                         <div className="usersHeader">Assigned</div>
-                            <SimpleBar style={{maxHeight:255}} >
+                            <SimpleBar style={{maxHeight:150}} >
                                 <Users users = {users} />
                             </SimpleBar>
                             
@@ -200,7 +228,7 @@ const ProjectPage = () => {
                 
                     <Row>
                         <div className="addTicketToProject">
-                            <button onClick={showCreateTicketModal} className="addTicketBtn">
+                            <button onClick={showCreateTicketModal} className="addTicketBtn" >
                                 
                                 Create new Ticket
                             </button>
@@ -209,9 +237,9 @@ const ProjectPage = () => {
                     </Row>
                 </Col>
                
-                {(ticketModal)&& <div ref={ticketRef} ><TicketModal  ticket={ticket} /></div>}
+                {(ticketModal)&& <div ref={ticketRef} ><TicketModal  ticket={ticket} doneTicket={DoneTicket} DeleteTicket={DeleteTicket} /></div>}
                 {(addUserModal)&& <div ref={ticketRef}><UsersModal lista={lista} addUsersToList={addUsersToList} updateUsers={updateUsers} deleteUserFromList={deleteUserFromList} /></div>}
-                {(createTicketModal)&& <div><CreateTicketModal listaUsers={users} assignUser={assignUser}/></div>}
+                {(createTicketModal)&& <div ref={ticketRef}><CreateTicketModal listaUsers={users} assignUser={assignUser} addTicket={addTicket}/></div>}
             </Row>
                
            

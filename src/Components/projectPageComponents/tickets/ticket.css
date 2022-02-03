@@ -29,9 +29,17 @@
   border-radius: 25px;
   position: relative;
 }
+.doneIcon{
+  padding: 10px;
+  border-radius: 15px;
+}
+.doneIcon:hover{
+ background-color: #232629;
+ cursor: pointer;
+}
 .ticketCreated {
   font-size: 10px;
-
+  padding: 10px;
   border-right: #24282b dotted 4px;
   position: relative;
 }

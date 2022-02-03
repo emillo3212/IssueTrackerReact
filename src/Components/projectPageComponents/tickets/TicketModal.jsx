@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import './ticketModal.css'
 
-const TicketModal = ({ticket}) => {
+const TicketModal = ({ticket,doneTicket,DeleteTicket}) => {
   return <div className='justify-content-md-center ticketModal'>
       <Col  className="ticketModalContent">
         <Row>
@@ -30,8 +30,8 @@ const TicketModal = ({ticket}) => {
 
        
 
-        <button className='deleteTicketBtn'>Delete</button>
-        <button className='doneTicketBtn'>Done</button>
+        <button className='deleteTicketBtn' onClick={()=>DeleteTicket(ticket)}>Delete</button>
+        <button className='doneTicketBtn' onClick={()=>doneTicket(ticket)}>Done</button>
         
       </Col>
   </div>
