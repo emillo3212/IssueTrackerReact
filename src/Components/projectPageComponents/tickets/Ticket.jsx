@@ -16,27 +16,26 @@ const Ticket = ({ticket,onClick,DoneTicket}) => {
         <Col onClick={()=>onClick(ticket)}>
             <Row>
             
-
                 <Col md={1} className="ticketCreated">
-                    {ticket.Created}
+                    {ticket.created}
                     <span class="tooltipText">Created</span>   
                 </Col>
 
-                <Col  md={4} className="ticketName">{ticket.Name}
+                <Col  md={4} className="ticketName">{ticket.name}
                     <span class="tooltipText">Name of ticket</span>
                 </Col>
                 
                 <Col  className="ticketCreatedBy">
-                    {ticket.CreatedBy}
+                    {ticket.createdBy.firstName}  {ticket.createdBy.lastName}
                     <span class="tooltipText">Created By</span>
                 </Col>
                 <Col className="ticketAssignTo">
-                    {ticket.AssignedTo}
+                {ticket.assignTo.firstName}  {ticket.assignTo.lastName}
                     <span class="tooltipText">Assigned To</span>
                 </Col>
                 <Col md={1} className="ticketPriority">
-                    <MdSignalCellular1Bar className='ticketPriorityIcon' size={20} color={(ticket.Priority==='High')? '#ff5f63' : (ticket.Priority==='Low')?'#00ebb8': '#df9f1f'}/>
-                    <span class="tooltipText">{ticket.Priority} Priority</span>
+                    <MdSignalCellular1Bar className='ticketPriorityIcon' size={20} color={(ticket.Priority==='High')? '#ff5f63' : (ticket.priority==='Low')?'#00ebb8': '#df9f1f'}/>
+                    <span class="tooltipText">{ticket.priority} Priority</span>
                 </Col>
             </Row>
         

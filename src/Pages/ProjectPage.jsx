@@ -1,6 +1,6 @@
 import React, { useState,useEffect,useRef } from 'react'
 
-import {AiOutlineUserAdd} from 'react-icons/ai'
+import {AiOutlineConsoleSql, AiOutlineUserAdd} from 'react-icons/ai'
 import {FaPlus} from "react-icons/fa"
 import Tickets from '../Components/projectPageComponents/tickets/Tickets'
 import Users from '../Components/projectPageComponents/users/Users'
@@ -16,50 +16,24 @@ import { MdGrid3X3 } from 'react-icons/md'
 
 import SimpleBar from 'simplebar-react'
 import CreateTicketModal from '../Components/projectPageComponents/tickets/CreateTicketModal'
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
 const ProjectPage = () => {
-    const [tickets,setTickets] = useState([
-        {
-            Id: 1,
-            Name: 'Create login page',
-            Description: 'Page should contain \n -login \n -password \n -confirm password \n -button to login \n and link to registration page',
-            Created:  '21.03.2022   21:20',
-            CreatedBy: 'Jorgee Ulani',
-            AssignedTo: 'Maks Kolanko',
-            Priority: 'Low',
-            Done: false,
-        },
-        {
-            Id: 2,
-            Name: 'Design homePage',
-            Description: 'ask Thomas about more details',
-            Created: '22.03.2022    13:42',
-            CreatedBy: 'Joe Biden',
-            AssignedTo: 'Vladimir Putin',
-            Priority: 'Medium',
-            Done: true,
-        },
-    ]
-    );
+    const {id} = useParams()
+    const [tickets,setTickets] = useState([]);
+    const [users,setUsers] = useState([]);
 
-    const [users, setUsers] = useState([
-        {
-            Id: 1,
-            Name:'Piotr Sowa',
-        },
-        {
-            Id: 2,
-            Name:'Adam Małysz',
-        },
-        {
-            Id: 3,
-            Name:'Wojtek Wojtaszewski',
-        },
-        {
-            Id: 4,
-            Name:'Adam Hiller',
-        },
-    ])
+    
+    useEffect(()=>{
+        axios.get('https://localhost:44346/api/Project/'+id)
+            .then(res=>{
+                setUsers([...res.data.users])
+                setTickets([...res.data.tickets])
+            })
+    },[])
+   
+   
 
     const [lista,setLista] = useState([
         {
@@ -171,8 +145,6 @@ const ProjectPage = () => {
         newTicket[0].Id = tickets.length+1;
         setTickets([...tickets,...newTicket])
         setCreateTicketModal(!createTicketModal)
-        console.log(newTicket.Id)
-        console.log(tickets)
     }
     
     const DoneTicket = (ticket) => {
@@ -189,7 +161,7 @@ const ProjectPage = () => {
         setTicketModal(false)
     }
     const DeleteTicket = (ticket) =>{
-        var ticketToDelete = tickets.filter(t=>t.Id!==ticket.Id)
+        var ticketToDelete = tickets.filter(t=>t.id!==ticket.id)
         setTickets(ticketToDelete)
         setTicketModal(!ticketModal)
     }

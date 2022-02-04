@@ -8,7 +8,7 @@ const Users = ({users}) => {
     
 
     {users.map((user)=>(
-        <User key={user.Id} user={user}/>
+        <User key={user.id} user={user}/>
     ))}
   </>
         
