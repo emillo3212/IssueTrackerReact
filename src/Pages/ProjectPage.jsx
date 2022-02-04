@@ -2,22 +2,24 @@ import React, { useState,useEffect,useRef } from 'react'
 
 import {AiOutlineConsoleSql, AiOutlineUserAdd} from 'react-icons/ai'
 import {FaPlus} from "react-icons/fa"
-import Tickets from '../Components/projectPageComponents/tickets/Tickets'
-import Users from '../Components/projectPageComponents/users/Users'
-import TicketModal from '../Components/projectPageComponents/tickets/TicketModal'
-import UsersModal from '../Components/projectPageComponents/users/UsersModal'
+import Tickets from '../Components/projectPage/tickets/Tickets'
+import Users from '../Components/projectPage/users/Users'
+import TicketModal from '../Components/projectPage/tickets/TicketModal'
+import UsersModal from '../Components/projectPage/users/UsersModal'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Col, Container, Row} from 'react-bootstrap'
 
 import './projectPage.css'
-import '../Components/projectPageComponents/users/user.css'
+import '../Components/projectPage/users/user.css'
 import { MdGrid3X3 } from 'react-icons/md'
 
 import SimpleBar from 'simplebar-react'
+
 import CreateTicketModal from '../Components/projectPageComponents/tickets/CreateTicketModal'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+
 
 const ProjectPage = () => {
     const {id} = useParams()
