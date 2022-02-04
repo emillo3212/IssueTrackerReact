@@ -4,7 +4,7 @@ import { FaMinus } from 'react-icons/fa'
 import {MdDone,MdSignalCellular1Bar,MdSignalCellular4Bar} from 'react-icons/md'
 import TicketModal from './TicketModal';
 
-const Ticket = ({ticket,onClick,DoneTicket}) => {
+function Ticket({ticket,onClick,DoneTicket}) {
    
   return(<>
   <Container className='ticket' >
@@ -15,8 +15,6 @@ const Ticket = ({ticket,onClick,DoneTicket}) => {
         </Col>
         <Col onClick={()=>onClick(ticket)}>
             <Row>
-            
-
                 <Col md={1} className="ticketCreated">
                     {ticket.Created}
                     <span class="tooltipText">Created</span>   

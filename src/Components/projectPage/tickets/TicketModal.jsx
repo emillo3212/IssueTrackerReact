@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import './ticketModal.css'
 
-const TicketModal = ({ticket,doneTicket,DeleteTicket}) => {
+function TicketModal({ticket,doneTicket,DeleteTicket}){
   return <div className='justify-content-md-center ticketModal'>
       <Col  className="ticketModalContent">
         <Row>
