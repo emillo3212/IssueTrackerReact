@@ -16,7 +16,7 @@ import { MdGrid3X3 } from 'react-icons/md'
 
 import SimpleBar from 'simplebar-react'
 
-import CreateTicketModal from '../Components/projectPageComponents/tickets/CreateTicketModal'
+import CreateTicketModal from '../Components/projectPage/tickets/CreateTicketModal'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
@@ -24,59 +24,54 @@ import { useParams } from 'react-router-dom'
 const ProjectPage = () => {
     const {id} = useParams()
     const [tickets,setTickets] = useState([]);
+    const [usersInProject,setUsersInProject] = useState([]);
+    const [project,setProject] = useState([]);
     const [users,setUsers] = useState([]);
-
+    
+   
     
     useEffect(()=>{
         axios.get('https://localhost:44346/api/Project/'+id)
             .then(res=>{
-                setUsers([...res.data.users])
+                setProject({...res.data})
+                setUsersInProject([...res.data.users])
                 setTickets([...res.data.tickets])
             })
     },[])
+
+    useEffect(()=>{
+        axios.get('https://localhost:44346/api/User')
+            .then(res=>{
+                
+                [...res.data].map(o=>{
+                    let u = [
+                        {
+                            id:o.id,
+                            firstName:o.firstName
+                        }
+                    ]
+                   //console.log(u)
+                    setUsers(users=>[...users,...u])
+                })
+               
+
+               
+                
+            })
+    },[])
+
+    useEffect(()=>{
+      // console.log(users)
+    },[users])
+
+    useEffect(()=>{
+       //console.log(usersInProject)
+        
+     },[usersInProject])
+
    
    
-
-    const [lista,setLista] = useState([
-        {
-          Id:1,
-          Name:'Stefan Stefanowski',
-        },
-        {
-          Id:2,
-          Name:'Alan Alanowski',
-        },
-        {
-          Id:3,
-          Name:'Kamil Kamilowski',
-        },
-        {
-          Id:4,
-          Name:'Adrian Adrianowski',
-        },
-        {
-          Id:5,
-          Name:'Mikołaj Mikołajewski',
-        },
-        {
-          Id:6,
-          Name:'Wojtek Wojtyła',
-        },
-        {
-          Id:7,
-          Name:'Paweł Pawłowski',
-        },
-        {
-          Id:8,
-          Name:'Monika Monikowska',
-        },
-        {
-          Id:9,
-          Name:'Krzystof Krzystowski',
-        },
-    
-      ]);
-
+   
     const ticketRef = useRef()
 
     useEffect(()=>{
@@ -101,6 +96,19 @@ const ProjectPage = () => {
     const [ticketModal,setTicketModal] = useState(false)
     const [ticket,setTicket] = useState([]) 
 
+    function usersOutsideProject(a,b){
+        for(var i=0; i < a.length; i++) {
+            for(var j=0; j < b.length; j++) {
+                if(JSON.stringify(a[i])  == JSON.stringify(b[j])) {
+                    a.splice(i, 1);
+                }
+            }
+        }
+
+       return a
+    }
+
+
     const showTicketModal = (ticket) =>{
         setTicketModal(!ticketModal)
         setTicket(ticket)
@@ -116,11 +124,10 @@ const ProjectPage = () => {
 
     const addUsersToList = (dodany) =>{
         setUsersList([...usersList,dodany])
-        console.log(users)
     }
 
     const updateUsers = () => {
-      setUsers([...users,...usersList])
+      setUsersInProject([...usersInProject,...usersList])
       setAddUserModal(!addUserModal)
       setUsersList([])
     }
@@ -179,12 +186,9 @@ const ProjectPage = () => {
                 <Col lg={3}>
                     <Row>
                         <div className='projectsInfo'>
-                            <div className='projectTittle'>Project number 1</div>
+                            <div className='projectTittle'>{project.name}</div>
                             <div className='projectDescription'>
-                                Bardzo super project który jest the best mowie ci
-                                Bardzo super project który jest the best mowie ci
-                                Bardzo super project który jest the best mowie ci
-                                Bardzo super project który jest the best mowie ci
+                                {project.description}
                                 </div>
                         </div>
                     </Row>
@@ -193,7 +197,7 @@ const ProjectPage = () => {
                         <div className='usersInProject'>
                         <div className="usersHeader">Assigned</div>
                             <SimpleBar style={{maxHeight:150}} >
-                                <Users users = {users} />
+                                <Users users = {usersInProject} />
                             </SimpleBar>
                             
                             <div className="addUserToProject"><AiOutlineUserAdd onClick={showAddUserModal} style={{margin:5}} className='addUserBtn' size={80} color='#00ebb8'/></div>
@@ -212,8 +216,8 @@ const ProjectPage = () => {
                 </Col>
                
                 {(ticketModal)&& <div ref={ticketRef} ><TicketModal  ticket={ticket} doneTicket={DoneTicket} DeleteTicket={DeleteTicket} /></div>}
-                {(addUserModal)&& <div ref={ticketRef}><UsersModal lista={lista} addUsersToList={addUsersToList} updateUsers={updateUsers} deleteUserFromList={deleteUserFromList} /></div>}
-                {(createTicketModal)&& <div ref={ticketRef}><CreateTicketModal listaUsers={users} assignUser={assignUser} addTicket={addTicket}/></div>}
+                {(addUserModal)&& <div ref={ticketRef}><UsersModal projectId={id} lista={usersOutsideProject(users,usersInProject)} addUsersToList={addUsersToList} updateUsers={updateUsers} deleteUserFromList={deleteUserFromList} /></div>}
+                {(createTicketModal)&& <div ref={ticketRef}><CreateTicketModal listaUsers={usersInProject} assignUser={assignUser} addTicket={addTicket}/></div>}
             </Row>
                
            

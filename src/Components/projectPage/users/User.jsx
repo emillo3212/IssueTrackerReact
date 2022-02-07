@@ -2,7 +2,7 @@ import React from 'react';
 
 const User = ({user}) => {
   return <div className='user'>
-      {user.user.firstName}  {user.user.lastName}
+      {user.firstName}  {user.lastName}
   </div>
 };
 

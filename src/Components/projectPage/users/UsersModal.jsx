@@ -6,7 +6,7 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import UserToModalList from './userToModalList';
 
-const UsersModal = ({lista,addUsersToList,updateUsers,deleteUserFromList}) => {
+const UsersModal = ({projectId,lista,addUsersToList,updateUsers,deleteUserFromList}) => {
   
   const [searchUser,setSearchUser] = useState("")
 
@@ -27,10 +27,10 @@ const UsersModal = ({lista,addUsersToList,updateUsers,deleteUserFromList}) => {
           {lista.filter((val)=>{
               if(searchUser==""){
                 return val;
-              }else if(val.Name.toLowerCase().includes(searchUser.toLowerCase())){
+              }else if(val.firstName.toLowerCase().includes(searchUser.toLowerCase())){
                 return val;
               }}).map((add)=>(
-              <UserToModalList key={add.Id} add={add} addUsersToList={addUsersToList} deleteUserFromList={deleteUserFromList} />
+              <UserToModalList key={add.id} add={add} addUsersToList={addUsersToList} deleteUserFromList={deleteUserFromList} />
             ))}
 
         </SimpleBar>

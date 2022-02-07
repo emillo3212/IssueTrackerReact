@@ -9,7 +9,7 @@ const UserToModalList = ({add,addUsersToList,deleteUserFromList}) => {
 
   return (
     <div onClick={()=>{setSelected(!selected);!selected ? addUsersToList(add) : deleteUserFromList(add.Name)}} className='userFromList' style={{background: (selected) ? '#00a3ff':''}}> 
-        {add.Name}
+        {add.firstName}
     </div>
   )
 };
