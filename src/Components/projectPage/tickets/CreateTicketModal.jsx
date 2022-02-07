@@ -66,13 +66,16 @@ const CreateTicketModal = ({listaUsers,assignUser,addTicket}) => {
   };
 
   const ticketData = {
-    Id:1,
-    Name:tittle,
-    Created:new Date().toLocaleString(),
-    Description:description,
-    CreatedBy:"Karol Wojtaszewski",
-    AssignedTo:activeUser.Name,
-    Priority:priority
+    name:tittle,
+    description:description,
+    assignToId:activeUser.id,
+    created:new Date().toLocaleString(),
+    
+   
+    //createdBy:"Karol Wojtaszewski",
+    
+    priority:priority,
+    projectId:1
   }
   const errorMessage = (error) =>{
     setMessage(error)

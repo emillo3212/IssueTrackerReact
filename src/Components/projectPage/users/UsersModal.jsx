@@ -9,7 +9,12 @@ import UserToModalList from './userToModalList';
 const UsersModal = ({projectId,lista,addUsersToList,updateUsers,deleteUserFromList}) => {
   
   const [searchUser,setSearchUser] = useState("")
+  const [selectedUsers,setSelectedUsers] = useState([])
 
+  function addSelectedUser(user){
+    setSelectedUsers(selectedUsers=>[...selectedUsers,user])
+    console.log(selectedUsers)
+  }
 
   return (
   <div className='UsersMoal'>
@@ -30,14 +35,14 @@ const UsersModal = ({projectId,lista,addUsersToList,updateUsers,deleteUserFromLi
               }else if(val.firstName.toLowerCase().includes(searchUser.toLowerCase())){
                 return val;
               }}).map((add)=>(
-              <UserToModalList key={add.id} add={add} addUsersToList={addUsersToList} deleteUserFromList={deleteUserFromList} />
+              <UserToModalList key={add.id} add={add} addUsersToList={addSelectedUser} deleteUserFromList={deleteUserFromList} />
             ))}
 
         </SimpleBar>
             
         
       </Col>
-      <button onClick={updateUsers} className='col-5 p-2 m-4 btn' style={{background:'#00b552', color:'white',fontWeight:'bold'}}>Add</button>
+      <button onClick={()=>updateUsers(selectedUsers)} className='col-5 p-2 m-4 btn' style={{background:'#00b552', color:'white',fontWeight:'bold'}}>Add</button>
        
     </Row>
 

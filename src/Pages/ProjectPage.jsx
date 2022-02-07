@@ -27,9 +27,12 @@ const ProjectPage = () => {
     const [usersInProject,setUsersInProject] = useState([]);
     const [project,setProject] = useState([]);
     const [users,setUsers] = useState([]);
-    
+
+    const [ticketModal,setTicketModal] = useState(false)
+    const [ticket,setTicket] = useState([]) 
+
+    const [createTicketModal,setCreateTicketModal] = useState(false)
    
-    
     useEffect(()=>{
         axios.get('https://localhost:44346/api/Project/'+id)
             .then(res=>{
@@ -52,25 +55,56 @@ const ProjectPage = () => {
                     ]
                    //console.log(u)
                     setUsers(users=>[...users,...u])
-                })
-               
-
-               
-                
+                })      
             })
     },[])
 
-    useEffect(()=>{
-      // console.log(users)
-    },[users])
 
-    useEffect(()=>{
-       //console.log(usersInProject)
-        
-     },[usersInProject])
+    function updateUsers(selectedUsers){
+        let us = [];
 
-   
-   
+        usersInProject.map(x=>{
+            let a = {
+                userId: x.id
+            }
+
+            us.push(a)
+        })
+
+        selectedUsers.map(x=>{
+            let a = {
+                userId: x.id
+            }
+
+            us.push(a)
+        })
+
+        var data = {
+            id: id,
+            users: us
+        }
+
+        axios.put("https://localhost:44346/api/Project/",data)
+            .then(res => {
+                console.log(res);
+                setUsersInProject([...usersInProject,...selectedUsers])
+            .catch(error => console.log(error))
+            })
+
+        setAddUserModal(!addUserModal)
+    
+    }
+
+    function addTicket(newTicket){
+        newTicket.projectId = id;
+        axios.post('https://localhost:44346/api/Ticket',...newTicket)
+            .then(setTickets([...tickets,...newTicket])
+            .catch(error=>console.log(error))
+            );
+       
+        setCreateTicketModal(!createTicketModal)
+    }
+    
    
     const ticketRef = useRef()
 
@@ -93,8 +127,7 @@ const ProjectPage = () => {
         
     })
 
-    const [ticketModal,setTicketModal] = useState(false)
-    const [ticket,setTicket] = useState([]) 
+
 
     function usersOutsideProject(a,b){
         for(var i=0; i < a.length; i++) {
@@ -122,22 +155,12 @@ const ProjectPage = () => {
         setUsersList([])
     }
 
-    const addUsersToList = (dodany) =>{
-        setUsersList([...usersList,dodany])
-    }
-
-    const updateUsers = () => {
-      setUsersInProject([...usersInProject,...usersList])
-      setAddUserModal(!addUserModal)
-      setUsersList([])
-    }
-
     const deleteUserFromList = (user) =>{
         const list = usersList.filter(item => item.Name !== user )
         setUsersList(list)
     }
 
-    const [createTicketModal,setCreateTicketModal] = useState(false)
+    
 
     const showCreateTicketModal = () =>{
         setCreateTicketModal(!createTicketModal)
@@ -149,12 +172,6 @@ const ProjectPage = () => {
         setUserAssigned(selectedUser)
     }
 
-    const addTicket = (newTicket) => {
-        
-        newTicket[0].Id = tickets.length+1;
-        setTickets([...tickets,...newTicket])
-        setCreateTicketModal(!createTicketModal)
-    }
     
     const DoneTicket = (ticket) => {
         var getTickets = [...tickets]
@@ -216,7 +233,7 @@ const ProjectPage = () => {
                 </Col>
                
                 {(ticketModal)&& <div ref={ticketRef} ><TicketModal  ticket={ticket} doneTicket={DoneTicket} DeleteTicket={DeleteTicket} /></div>}
-                {(addUserModal)&& <div ref={ticketRef}><UsersModal projectId={id} lista={usersOutsideProject(users,usersInProject)} addUsersToList={addUsersToList} updateUsers={updateUsers} deleteUserFromList={deleteUserFromList} /></div>}
+                {(addUserModal)&& <div ref={ticketRef}><UsersModal projectId={id} lista={usersOutsideProject(users,usersInProject)} updateUsers={updateUsers} deleteUserFromList={deleteUserFromList} /></div>}
                 {(createTicketModal)&& <div ref={ticketRef}><CreateTicketModal listaUsers={usersInProject} assignUser={assignUser} addTicket={addTicket}/></div>}
             </Row>
                
