@@ -31,7 +31,7 @@ const ProjectPage = () => {
    
     
     useEffect(()=>{
-        axios.get('https://localhost:44346/api/Project/'+id)
+        axios.get('http://192.168.0.102:8084/api/Project/'+id)
             .then(res=>{
                 setProject({...res.data})
                 setUsersInProject([...res.data.users])
@@ -40,7 +40,7 @@ const ProjectPage = () => {
     },[])
 
     useEffect(()=>{
-        axios.get('https://localhost:44346/api/User')
+        axios.get('http://192.168.0.102:8084/api/User')
             .then(res=>{
                 
                 [...res.data].map(o=>{

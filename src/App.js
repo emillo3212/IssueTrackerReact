@@ -12,7 +12,7 @@ const App = () => {
   const [projects, setProjects] = useState([])
   
   useEffect(()=>{
-    axios.get('https://localhost:44346/api/Project')
+    axios.get('http://192.168.0.102:8084/api/Project')
       .then(res=>{
       var data = res.data
       setProjects([...data])

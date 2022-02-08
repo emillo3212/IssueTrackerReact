@@ -8,7 +8,7 @@ function UserToTicketModal({user,clicked,selected,assignUser}){
               className='userFromList'
               style={{backgroundColor: ((selected===user)) ? '#00a3ff':''}}>
 
-              {user.Name}
+              {user.firstName}
           </div>;
 };
 
