@@ -1,10 +1,24 @@
 .topBar {
-  background-color: #00a3ff;
-  height: 60px;
-  margin-bottom: 25px;
+  background-color: #16a3db;
 }
 .logo {
-  color: white;
-  font-size: 40px;
+  color: #ffffff;
+  font-size: 30px;
   font-weight: bold;
+  text-decoration: none;
+  margin-left: 50px;
+}
+.logo:hover {
+  color: white;
+  cursor: pointer;
+}
+.currentUser {
+  color: white;
+  margin-right: 50px;
+  padding: 5px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.currentUser:hover {
+  cursor: pointer;
 }

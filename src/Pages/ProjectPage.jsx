@@ -19,7 +19,7 @@ import SimpleBar from 'simplebar-react'
 import CreateTicketModal from '../Components/projectPage/tickets/CreateTicketModal'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-
+import Cookies from 'js-cookie';
 
 const ProjectPage = () => {
     const {id} = useParams()
@@ -34,23 +34,58 @@ const ProjectPage = () => {
     const [createTicketModal,setCreateTicketModal] = useState(false)
    
     useEffect(()=>{
-        axios.get('http://192.168.0.102:8084/api/Project/'+id)
+    var toke = "Bearer"+" "+Cookies.get('Jwt')
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': toke
+    }
+        axios.get('http://localhost:8084/api/Project/'+id,{headers:headers})
             .then(res=>{
                 setProject({...res.data})
                 setUsersInProject([...res.data.users])
                 setTickets([...res.data.tickets])
+                console.log([res.data.tickets])
             })
     },[])
 
+    const getTickets =()=>{
+        var toke = "Bearer"+" "+Cookies.get('Jwt')
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': toke
+        }
+        axios.get('http://localhost:8084/api/Project/'+id,{headers:headers})
+        .then(res=>{
+            setTickets([...res.data.tickets])
+        })
+    }
+
+    const updateTickets = (data)=>{
+        var toke = "Bearer"+" "+Cookies.get('Jwt')
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': toke
+        }
+        axios.put('http://localhost:8084/api/Ticket',data,{headers:headers})
+        .then(res=>getTickets())
+            
+    }
+
     useEffect(()=>{
-        axios.get('http://192.168.0.102:8084/api/User')
+        var toke = "Bearer"+" "+Cookies.get('Jwt')
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': toke
+        }
+        axios.get('http://localhost:8084/api/User',{headers:headers})
             .then(res=>{
                 
                 [...res.data].map(o=>{
                     let u = [
                         {
                             id:o.id,
-                            firstName:o.firstName
+                            firstName:o.firstName,
+                            lastName:o.lastName
                         }
                     ]
                    //console.log(u)
@@ -83,10 +118,15 @@ const ProjectPage = () => {
             id: id,
             users: us
         }
+        var toke = "Bearer"+" "+Cookies.get('Jwt')
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': toke
+        }
 
-        axios.put("https://localhost:44346/api/Project/",data)
+        axios.put("http://localhost:8084/api/Project/",data,{headers:headers})
             .then(res => {
-                console.log(res);
+                console.log(res.data);
                 setUsersInProject([...usersInProject,...selectedUsers])
             .catch(error => console.log(error))
             })
@@ -96,14 +136,49 @@ const ProjectPage = () => {
     }
 
     function addTicket(newTicket){
-        newTicket.projectId = id;
-        axios.post('https://localhost:44346/api/Ticket',...newTicket)
-            .then(setTickets([...tickets,...newTicket])
-            .catch(error=>console.log(error))
-            );
+        var toke = "Bearer"+" "+Cookies.get('Jwt')
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': toke
+        }
+        axios.post('http://localhost:8084/api/Ticket',...newTicket,{headers:headers})
+            .then(res=>{
+                console.log(res.data);
+                getTickets();
+            }) .catch(error=>console.log(error));
        
         setCreateTicketModal(!createTicketModal)
     }
+
+    function DoneTicket(ticket){
+
+        var index = tickets.findIndex((o)=>o.id===ticket.id)
+
+        let uTicket = {
+            id:tickets[index].id,
+            done:!ticket.done
+        }
+
+        updateTickets(uTicket)
+        setTicketModal(false)
+    }
+    const DeleteTicket = (ticket)=>{
+        console.log(ticket.id)
+        var data={
+            id:ticket.id
+        }
+        var toke = "Bearer"+" "+Cookies.get('Jwt')
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': toke
+        }
+        axios.delete('http://localhost:8084/api/Ticket',{data:{id:ticket.id}, headers:headers})
+            .then(res=>getTickets())
+            .catch(error=>console.log(error));
+     
+        setTicketModal(!ticketModal)
+    }
+
     
    
     const ticketRef = useRef()
@@ -155,13 +230,6 @@ const ProjectPage = () => {
         setUsersList([])
     }
 
-    const deleteUserFromList = (user) =>{
-        const list = usersList.filter(item => item.Name !== user )
-        setUsersList(list)
-    }
-
-    
-
     const showCreateTicketModal = () =>{
         setCreateTicketModal(!createTicketModal)
     }
@@ -173,24 +241,8 @@ const ProjectPage = () => {
     }
 
     
-    const DoneTicket = (ticket) => {
-        var getTickets = [...tickets]
-        var done = ticket.Done
-        ticket.Done=!done
-        
-        var index = tickets.find((o)=>o.id===ticket.Id)
-        let updateTicket = {...getTickets[index]};
-        updateTicket = ticket
-        getTickets[index] = updateTicket
-
-        setTickets(getTickets)
-        setTicketModal(false)
-    }
-    const DeleteTicket = (ticket) =>{
-        var ticketToDelete = tickets.filter(t=>t.id!==ticket.id)
-        setTickets(ticketToDelete)
-        setTicketModal(!ticketModal)
-    }
+   
+   
 
     return (
         
@@ -233,7 +285,7 @@ const ProjectPage = () => {
                 </Col>
                
                 {(ticketModal)&& <div ref={ticketRef} ><TicketModal  ticket={ticket} doneTicket={DoneTicket} DeleteTicket={DeleteTicket} /></div>}
-                {(addUserModal)&& <div ref={ticketRef}><UsersModal projectId={id} lista={usersOutsideProject(users,usersInProject)} updateUsers={updateUsers} deleteUserFromList={deleteUserFromList} /></div>}
+                {(addUserModal)&& <div ref={ticketRef}><UsersModal projectId={id} lista={usersOutsideProject(users,usersInProject)} updateUsers={updateUsers}/></div>}
                 {(createTicketModal)&& <div ref={ticketRef}><CreateTicketModal listaUsers={usersInProject} assignUser={assignUser} addTicket={addTicket}/></div>}
             </Row>
                

@@ -15,6 +15,10 @@ const UsersModal = ({projectId,lista,addUsersToList,updateUsers,deleteUserFromLi
     setSelectedUsers(selectedUsers=>[...selectedUsers,user])
     console.log(selectedUsers)
   }
+  function deleteUserFromList(user){
+    let lista = selectedUsers.filter(x=>x.id!==user.id)
+    setSelectedUsers(lista)
+  }
 
   return (
   <div className='UsersMoal'>

@@ -1,14 +1,13 @@
-
-.project{
-    background-color: #24282b;
-    margin: auto;
-    padding: 0px 20px 20px 20px;
-    border-radius: 25px;
-    text-decoration: none;
-    color: white;
+.project {
+  background-color: #24282b;
+  margin: auto;
+  padding: 0px 20px 20px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  color: white;
 }
-.tittle{
-    font-size: 26px;
-    font-weight: bold;
-    padding: 8px;
+.tittle {
+  font-size: 26px;
+  font-weight: bold;
+  padding: 8px;
 }

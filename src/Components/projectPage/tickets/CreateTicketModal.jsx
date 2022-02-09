@@ -5,9 +5,10 @@ import './CreateTicketModal.css'
 import UserToTicketModal from './UserToTicketModal';
 import SimpleBar from 'simplebar-react';
 import Select from 'react-select'
+import { useParams } from 'react-router-dom'
 
 const CreateTicketModal = ({listaUsers,assignUser,addTicket}) => {
-  
+  const {id} = useParams()
   const [activeUser,setActiveUser] = useState("")
 
   const [searchUser,setSearchUser] = useState("")
@@ -69,13 +70,10 @@ const CreateTicketModal = ({listaUsers,assignUser,addTicket}) => {
     name:tittle,
     description:description,
     assignToId:activeUser.id,
-    created:new Date().toLocaleString(),
-    
-   
-    //createdBy:"Karol Wojtaszewski",
     
     priority:priority,
-    projectId:1
+    projectId:id,
+    createdById:2
   }
   const errorMessage = (error) =>{
     setMessage(error)

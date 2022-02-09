@@ -1,0 +1,29 @@
+.login {
+  background-color: #191b1d;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 520px;
+  height: 300px;
+  border-radius: 35px;
+}
+.loginInput {
+  font-size: 22px;
+  background-color: #24282b;
+  color: white;
+  margin-bottom: 20px;
+  border-radius: 25px;
+  border: 0;
+  padding: 10px;
+  width: 400px;
+  text-align: center;
+}
+.loginTittle {
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  padding: 30px;
+}

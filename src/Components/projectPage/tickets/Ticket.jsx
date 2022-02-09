@@ -10,7 +10,7 @@ function Ticket({ticket,onClick,DoneTicket}) {
   <Container className='ticket' >
     <Row>
         <Col md={{span:'auto'}} className="ticketDone">
-                    <div className='doneIcon' onClick={()=>DoneTicket(ticket)}>{ticket.Done ? <MdDone size={20}/> : <FaMinus size={20}/>}</div>
+                    <div className='doneIcon' onClick={()=>DoneTicket(ticket)}>{ticket.done ? <MdDone size={20}/> : <FaMinus size={20}/>}</div>
                         <span class="tooltipText">Done</span> 
         </Col>
         <Col onClick={()=>onClick(ticket)}>
@@ -34,7 +34,7 @@ function Ticket({ticket,onClick,DoneTicket}) {
                     <span class="tooltipText">Assigned To</span>
                 </Col>
                 <Col md={1} className="ticketPriority">
-                    <MdSignalCellular1Bar className='ticketPriorityIcon' size={20} color={(ticket.Priority==='High')? '#ff5f63' : (ticket.priority==='Low')?'#00ebb8': '#df9f1f'}/>
+                    <MdSignalCellular1Bar className='ticketPriorityIcon' size={20} color={(ticket.priority==='High')? '#ff5f63' : (ticket.priority==='Low')?'#00ebb8': '#df9f1f'}/>
                     <span class="tooltipText">{ticket.priority} Priority</span>
                 </Col>
             </Row>
