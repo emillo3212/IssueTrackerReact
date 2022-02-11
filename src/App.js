@@ -15,6 +15,8 @@ const App = () => {
   const [currentUser,setCurrentUser] = useState({});
   const [token,setToken] =  useState("");
   const [redirect,setRedirect]= useState(false);
+  const [isLoading,SetIsLoading] = useState(true);
+  const [loggedin,setLoggedin]=  useState(false);
 
   useEffect(()=>{
     var toke = "Bearer"+" "+Cookies.get('Jwt')
@@ -22,24 +24,21 @@ const App = () => {
       'Content-Type': 'application/json',
       'Authorization': toke
     }
-    axios.get('http://localhost:8084/api/User/user',{headers:headers,withCredentials:true})
+    axios.get('https://localhost:44346/api/User/user',{headers:headers,withCredentials:true})
       .then(res=>{setCurrentUser(res.data);console.log(res.data)})
       .catch(error=>{
         console.log(error)
       })
+
+      SetIsLoading(false);
   },[])
 
 
+  if(isLoading){
+    return "";
+  }
 
 
-  
-
- 
- 
- 
-
-  
-  
   //<HomePage projects = {projects} />
 //<LoginPage login={login} />
   return (
@@ -53,7 +52,7 @@ const App = () => {
         </Route>
         
           <Route path={"/:id"}>
-          {(Object.keys(currentUser).length!==0)?<ProjectPage />:<LoginPage/>}
+          {(Object.keys(currentUser).length!==0)?<ProjectPage currentUser={currentUser} />:<LoginPage/>}
           </Route>
         </Switch>
       
