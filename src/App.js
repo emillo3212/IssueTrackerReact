@@ -24,7 +24,7 @@ const App = () => {
       'Content-Type': 'application/json',
       'Authorization': toke
     }
-    axios.get('https://localhost:44346/api/User/user',{headers:headers,withCredentials:true})
+    axios.get('http://192.168.0.102:8084/api/User/user',{headers:headers,withCredentials:true})
       .then(res=>{setCurrentUser(res.data);console.log(res.data)})
       .catch(error=>{
         console.log(error)

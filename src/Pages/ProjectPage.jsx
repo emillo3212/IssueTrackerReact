@@ -46,7 +46,7 @@ const ProjectPage = ({currentUser}) => {
       'Content-Type': 'application/json',
       'Authorization': toke
     }
-        axios.get('https://localhost:44346/api/Project/'+id,{headers:headers})
+        axios.get('http://192.168.0.102:8084/api/Project/'+id,{headers:headers})
             .then(res=>{
                 setProject({...res.data})
                 setUsersInProject([...res.data.users])
@@ -62,7 +62,7 @@ const ProjectPage = ({currentUser}) => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
-        axios.get('https://localhost:44346/api/Project/'+id,{headers:headers})
+        axios.get('http://192.168.0.102:8084/api/Project/'+id,{headers:headers})
         .then(res=>{
             setTickets([...res.data.tickets])
         })
@@ -72,9 +72,10 @@ const ProjectPage = ({currentUser}) => {
         var toke = "Bearer"+" "+Cookies.get('Jwt')
         const headers = {
           'Content-Type': 'application/json',
-          'Authorization': toke
+          'Authorization': toke,
+          'Access-Control-Allow-Origin':'*'
         }
-        axios.put('https://localhost:44346/api/Ticket',data,{headers:headers})
+        axios.put('http://192.168.0.102:8084/api/Ticket/',data,{headers:headers})
         .then(res=>getTickets())
             
     }
@@ -85,7 +86,7 @@ const ProjectPage = ({currentUser}) => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
-        axios.get('https://localhost:44346/api/User',{headers:headers})
+        axios.get('http://192.168.0.102:8084/api/User',{headers:headers})
             .then(res=>{
                 
                 [...res.data].map(o=>{
@@ -132,7 +133,7 @@ const ProjectPage = ({currentUser}) => {
           'Authorization': toke
         }
 
-        axios.put("https://localhost:44346/api/Project/",data,{headers:headers})
+        axios.put("http://192.168.0.102:8084/api/Project/",data,{headers:headers})
             .then(res => {
                 console.log(res.data);
                 setUsersInProject([...usersInProject,...selectedUsers])
@@ -149,7 +150,7 @@ const ProjectPage = ({currentUser}) => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
-        axios.post('https://localhost:44346/api/Ticket',...newTicket,{headers:headers})
+        axios.post('http://192.168.0.102:8084/api/Ticket',...newTicket,{headers:headers})
             .then(res=>{
                 console.log(res.data);
                 getTickets();
@@ -158,7 +159,7 @@ const ProjectPage = ({currentUser}) => {
         setCreateTicketModal(!createTicketModal)
     }
 
-    function DoneTicket(ticket){
+    const DoneTicket=(ticket)=>{
 
         var index = tickets.findIndex((o)=>o.id===ticket.id)
 
@@ -180,7 +181,7 @@ const ProjectPage = ({currentUser}) => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
-        axios.delete('https://localhost:44346/api/Ticket',{data:{id:ticket.id}, headers:headers})
+        axios.delete('http://192.168.0.102:8084/api/Ticket',{data:{id:ticket.id}, headers:headers})
             .then(res=>getTickets())
             .catch(error=>console.log(error));
      
@@ -262,7 +263,7 @@ const ProjectPage = ({currentUser}) => {
         <Container fluid>
             
             <Row style={{marginRight:1}} className='justify-content-xl-center'>
-                <Col lg={9} xl={8} className='mx-xl-3'>
+                <Col lg={8} className='mx-xl-3'>
                     <Tickets tickets = {tickets} onClick={showTicketModal} DoneTicket={DoneTicket} />
                 </Col>
                 <Col lg={3}>

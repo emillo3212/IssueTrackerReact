@@ -9,7 +9,7 @@ const TicketModal = ({ticket,doneTicket,DeleteTicket}) => {
       <Col  className="ticketModalContent">
         <Row>
           <div className='ticketModalName'>{ticket.name}</div>
-          <div >{ticket.created}</div>
+          <div className='ticketTime'>{ticket.created}</div>
 
         </Row>
         <Row>

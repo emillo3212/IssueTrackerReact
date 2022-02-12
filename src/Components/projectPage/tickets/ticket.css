@@ -3,22 +3,25 @@
   color: white;
   border-radius: 25px;
   padding: 10px;
-  max-height: 87vh;
+  max-height: 640px;
   font-size: 14px;
   font-weight: 600;
+}
+.ticketsContainer{
+  max-height: 540px;
+  overflow-x: hidden;
+  padding: 10px;
 }
 .ticketHeader {
   font-size: 23px;
   font-weight: bold;
-  margin-bottom: 20px;
   border-bottom: 2px solid #1f2224;
-  padding-bottom: 10px;
 }
+
 .ticket {
-  padding: 5px;
   background-color: #1f2224;
   border-radius: 25px;
-  margin: 10px;
+  margin: 15px;
 }
 .ticket:hover {
   background-color: #292d30;
@@ -42,12 +45,16 @@
   padding: 10px;
   border-right: #24282b dotted 4px;
   position: relative;
+  color :rgb(128, 128, 128)
 }
 
 .ticketName {
   padding: 10px;
   border-right: #24282b dotted 4px;
   position: relative;
+  font-weight: bold;
+  overflow: hidden;
+  white-space: pre-line;
 }
 
 .ticketCreatedBy {
@@ -126,4 +133,15 @@
   visibility: visible;
   opacity: 1;
   font-size: 14px;
+}
+.doneFilter{
+  font-size: 12px;
+  font-weight: normal;
+  padding: 10px;
+  color: rgb(177, 177, 177);
+  float: left;
+}
+.doneFilter:hover{
+  cursor: pointer;
+  color: rgb(128, 128, 128);
 }

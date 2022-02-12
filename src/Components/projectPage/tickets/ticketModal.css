@@ -19,6 +19,12 @@
 .ticketModalName {
   font-size: 28px;
   font-weight: bold;
+  display: block;
+  
+}
+.ticketTime{
+  margin-bottom: 20px;
+  font-size: 12px;
 }
 .ticketModalDescription {
   margin: 15px;
@@ -27,6 +33,7 @@
 .detailsHeader {
   font-size: 18px;
   margin-top: 20px;
+  color: rgb(177, 177, 177);
 }
 .ticketModalCreatedBy {
   background-color: #1f2224;
@@ -37,6 +44,7 @@
 .createdByHeader {
   font-size: 18px;
   margin: 15px;
+  color: rgb(177, 177, 177);
 }
 .ticketModalAssignedTo {
   padding: 10px;
@@ -49,6 +57,7 @@
   font-size: 18px;
   margin-bottom: 5px;
   margin: 15px;
+  color: rgb(177, 177, 177);
 }
 .ticketModalPriority {
   padding: 10px;
@@ -60,6 +69,7 @@
   font-size: 18px;
   margin-bottom: 5px;
   margin: 15px;
+  color: rgb(177, 177, 177);
 }
 .deleteTicketBtn {
   height: 50px;
