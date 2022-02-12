@@ -16,7 +16,7 @@ const HomePage = ({currentUser}) => {
       'Authorization': toke
     }
     const fetchProjects = (id)=>{
-      axios.get('http://localhost:8084/api/Project/'+id,{headers:headers,withCredentials:true})
+      axios.get('http://192.168.0.102:8084/api/Project/'+id,{headers:headers,withCredentials:true})
         .then(res=>setProjects(projects=>[...projects,res.data]))
       
     }

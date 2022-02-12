@@ -39,7 +39,7 @@ const ProjectPage = () => {
       'Content-Type': 'application/json',
       'Authorization': toke
     }
-        axios.get('http://localhost:8084/api/Project/'+id,{headers:headers})
+        axios.get('http://192.168.0.102:8084/api/Project/'+id,{headers:headers})
             .then(res=>{
                 setProject({...res.data})
                 setUsersInProject([...res.data.users])
@@ -54,7 +54,7 @@ const ProjectPage = () => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
-        axios.get('http://localhost:8084/api/Project/'+id,{headers:headers})
+        axios.get('http://192.168.0.102:8084/api/Project/'+id,{headers:headers})
         .then(res=>{
             setTickets([...res.data.tickets])
         })
@@ -66,7 +66,7 @@ const ProjectPage = () => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
-        axios.put('http://localhost:8084/api/Ticket',data,{headers:headers})
+        axios.put('http://192.168.0.102:8084/api/Ticket',data,{headers:headers})
         .then(res=>getTickets())
             
     }
@@ -77,7 +77,7 @@ const ProjectPage = () => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
-        axios.get('http://localhost:8084/api/User',{headers:headers})
+        axios.get('http://192.168.0.102:8084/api/User',{headers:headers})
             .then(res=>{
                 
                 [...res.data].map(o=>{
@@ -124,7 +124,7 @@ const ProjectPage = () => {
           'Authorization': toke
         }
 
-        axios.put("http://localhost:8084/api/Project/",data,{headers:headers})
+        axios.put("http://192.168.0.102:8084/api/Project/",data,{headers:headers})
             .then(res => {
                 console.log(res.data);
                 setUsersInProject([...usersInProject,...selectedUsers])
@@ -141,7 +141,7 @@ const ProjectPage = () => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
-        axios.post('http://localhost:8084/api/Ticket',...newTicket,{headers:headers})
+        axios.post('http://192.168.0.102:8084/api/Ticket',...newTicket,{headers:headers})
             .then(res=>{
                 console.log(res.data);
                 getTickets();
@@ -172,7 +172,7 @@ const ProjectPage = () => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
-        axios.delete('http://localhost:8084/api/Ticket',{data:{id:ticket.id}, headers:headers})
+        axios.delete('http://192.168.0.102:8084/api/Ticket',{data:{id:ticket.id}, headers:headers})
             .then(res=>getTickets())
             .catch(error=>console.log(error));
      
