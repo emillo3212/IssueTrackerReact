@@ -16,6 +16,8 @@ const App = () => {
   const [currentUser,setCurrentUser] = useState({});
   const [token,setToken] =  useState("");
   const [redirect,setRedirect]= useState(false);
+  const [isLoading,SetIsLoading] = useState(true);
+  const [loggedin,setLoggedin]=  useState(false);
 
   useEffect(()=>{
     const cookies = new Cookies();
@@ -24,24 +26,30 @@ const App = () => {
       'Content-Type': 'application/json',
       'Authorization': toke
     }
+<<<<<<< HEAD
     axios.get('http://192.168.0.102:8084/api/User/user',{headers:headers,withCredentials:true})
+=======
+    axios.get('https://localhost:44346/api/User/user',{headers:headers,withCredentials:true})
+>>>>>>> 4de8db366744d0f8486addaba1f2e912f6c3f1e4
       .then(res=>{setCurrentUser(res.data);console.log(res.data)})
       .catch(error=>{
         console.log(error)
       })
+<<<<<<< HEAD
   },)
 
+=======
+>>>>>>> 4de8db366744d0f8486addaba1f2e912f6c3f1e4
+
+      SetIsLoading(false);
+  },[])
 
 
+  if(isLoading){
+    return "";
+  }
 
-  
 
- 
- 
- 
-
-  
-  
   //<HomePage projects = {projects} />
 //<LoginPage login={login} />
   return (
@@ -55,7 +63,7 @@ const App = () => {
         </Route>
         
           <Route path={"/:id"}>
-          {(Object.keys(currentUser).length!==0)?<ProjectPage />:<LoginPage/>}
+          {(Object.keys(currentUser).length!==0)?<ProjectPage currentUser={currentUser} />:<LoginPage/>}
           </Route>
         </Switch>
       

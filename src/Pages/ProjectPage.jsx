@@ -18,34 +18,46 @@ import SimpleBar from 'simplebar-react'
 
 import CreateTicketModal from '../Components/projectPage/tickets/CreateTicketModal'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { Redirect, useParams } from 'react-router-dom'
 import Cookies from 'js-cookie';
 
-const ProjectPage = () => {
+const ProjectPage = ({currentUser}) => {
     const {id} = useParams()
     const [tickets,setTickets] = useState([]);
     const [usersInProject,setUsersInProject] = useState([]);
     const [project,setProject] = useState([]);
     const [users,setUsers] = useState([]);
+    const [redirect,setRedirect] =useState(false);
 
     const [ticketModal,setTicketModal] = useState(false)
     const [ticket,setTicket] = useState([]) 
 
     const [createTicketModal,setCreateTicketModal] = useState(false)
-   
+
     useEffect(()=>{
+
+    if(currentUser.projects.includes(id))
+    {
+        setRedirect(true);
+    }
+
     var toke = "Bearer"+" "+Cookies.get('Jwt')
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': toke
     }
+<<<<<<< HEAD
         axios.get('http://192.168.0.102:8084/api/Project/'+id,{headers:headers})
+=======
+        axios.get('https://localhost:44346/api/Project/'+id,{headers:headers})
+>>>>>>> 4de8db366744d0f8486addaba1f2e912f6c3f1e4
             .then(res=>{
                 setProject({...res.data})
                 setUsersInProject([...res.data.users])
                 setTickets([...res.data.tickets])
                 console.log([res.data.tickets])
-            })
+            }).catch(error=> setRedirect(true))
+            console.log(currentUser.projects)
     },[])
 
     const getTickets =()=>{
@@ -54,7 +66,11 @@ const ProjectPage = () => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
+<<<<<<< HEAD
         axios.get('http://192.168.0.102:8084/api/Project/'+id,{headers:headers})
+=======
+        axios.get('https://localhost:44346/api/Project/'+id,{headers:headers})
+>>>>>>> 4de8db366744d0f8486addaba1f2e912f6c3f1e4
         .then(res=>{
             setTickets([...res.data.tickets])
         })
@@ -66,7 +82,11 @@ const ProjectPage = () => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
+<<<<<<< HEAD
         axios.put('http://192.168.0.102:8084/api/Ticket',data,{headers:headers})
+=======
+        axios.put('https://localhost:44346/api/Ticket',data,{headers:headers})
+>>>>>>> 4de8db366744d0f8486addaba1f2e912f6c3f1e4
         .then(res=>getTickets())
             
     }
@@ -77,7 +97,11 @@ const ProjectPage = () => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
+<<<<<<< HEAD
         axios.get('http://192.168.0.102:8084/api/User',{headers:headers})
+=======
+        axios.get('https://localhost:44346/api/User',{headers:headers})
+>>>>>>> 4de8db366744d0f8486addaba1f2e912f6c3f1e4
             .then(res=>{
                 
                 [...res.data].map(o=>{
@@ -124,7 +148,11 @@ const ProjectPage = () => {
           'Authorization': toke
         }
 
+<<<<<<< HEAD
         axios.put("http://192.168.0.102:8084/api/Project/",data,{headers:headers})
+=======
+        axios.put("https://localhost:44346/api/Project/",data,{headers:headers})
+>>>>>>> 4de8db366744d0f8486addaba1f2e912f6c3f1e4
             .then(res => {
                 console.log(res.data);
                 setUsersInProject([...usersInProject,...selectedUsers])
@@ -141,7 +169,11 @@ const ProjectPage = () => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
+<<<<<<< HEAD
         axios.post('http://192.168.0.102:8084/api/Ticket',...newTicket,{headers:headers})
+=======
+        axios.post('https://localhost:44346/api/Ticket',...newTicket,{headers:headers})
+>>>>>>> 4de8db366744d0f8486addaba1f2e912f6c3f1e4
             .then(res=>{
                 console.log(res.data);
                 getTickets();
@@ -172,7 +204,11 @@ const ProjectPage = () => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
+<<<<<<< HEAD
         axios.delete('http://192.168.0.102:8084/api/Ticket',{data:{id:ticket.id}, headers:headers})
+=======
+        axios.delete('https://localhost:44346/api/Ticket',{data:{id:ticket.id}, headers:headers})
+>>>>>>> 4de8db366744d0f8486addaba1f2e912f6c3f1e4
             .then(res=>getTickets())
             .catch(error=>console.log(error));
      
@@ -242,6 +278,11 @@ const ProjectPage = () => {
 
     
    
+   
+    if(redirect)
+    {
+        return <Redirect to="/"/>
+    }
    
 
     return (

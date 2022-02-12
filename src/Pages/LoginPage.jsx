@@ -4,6 +4,7 @@ import { Container,Row } from 'react-bootstrap';
 import './loginPage.css'
 import axios from 'axios';
 import {Redirect} from 'react-router-dom'
+import Cookies from 'js-cookie';
 
 const LoginPage = () => {
     const [email,setEmail] = useState("");
@@ -11,6 +12,7 @@ const LoginPage = () => {
 
     const [redirect,setRedirect]=useState(false)
 
+    
     const login =()=>{
       var data={
          email:email,
@@ -19,8 +21,13 @@ const LoginPage = () => {
        const headers = {
          'Content-Type': 'application/json'
        }
+<<<<<<< HEAD
        axios.post('http://192.168.0.102:8084/api/Account/Login',data,{headers:headers})
          .then(res=>{setRedirect(true);})
+=======
+       axios.post('https://localhost:44346/api/Account/Login',data,{headers:headers,withCredentials: true,})
+         .then(res=>{setRedirect(true);Cookies.set('Jwt',res.data)})
+>>>>>>> 4de8db366744d0f8486addaba1f2e912f6c3f1e4
          .catch(error=>console.log(error))
    
         
