@@ -46,7 +46,8 @@ const ProjectPage = ({currentUser}) => {
       'Content-Type': 'application/json',
       'Authorization': toke
     }
-        axios.get('http://192.168.0.102:8084/api/Project/'+id,{headers:headers})
+
+        axios.get('https://localhost:44346/api/Project/'+id,{headers:headers})
             .then(res=>{
                 setProject({...res.data})
                 setUsersInProject([...res.data.users])
@@ -62,7 +63,7 @@ const ProjectPage = ({currentUser}) => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
-        axios.get('http://192.168.0.102:8084/api/Project/'+id,{headers:headers})
+        axios.get('https://localhost:44346/api/Project/'+id,{headers:headers})
         .then(res=>{
             setTickets([...res.data.tickets])
         })
@@ -75,7 +76,8 @@ const ProjectPage = ({currentUser}) => {
           'Authorization': toke,
           'Access-Control-Allow-Origin':'*'
         }
-        axios.put('http://192.168.0.102:8084/api/Ticket/',data,{headers:headers})
+        axios.put('https://localhost:44346/api/Ticket',data,{headers:headers})
+
         .then(res=>getTickets())
             
     }
@@ -86,7 +88,8 @@ const ProjectPage = ({currentUser}) => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
-        axios.get('http://192.168.0.102:8084/api/User',{headers:headers})
+
+        axios.get('https://localhost:44346/api/User',{headers:headers})
             .then(res=>{
                 
                 [...res.data].map(o=>{
@@ -133,7 +136,8 @@ const ProjectPage = ({currentUser}) => {
           'Authorization': toke
         }
 
-        axios.put("http://192.168.0.102:8084/api/Project/",data,{headers:headers})
+
+        axios.put("https://localhost:44346/api/Project/",data,{headers:headers})
             .then(res => {
                 console.log(res.data);
                 setUsersInProject([...usersInProject,...selectedUsers])
@@ -150,7 +154,8 @@ const ProjectPage = ({currentUser}) => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
-        axios.post('http://192.168.0.102:8084/api/Ticket',...newTicket,{headers:headers})
+
+        axios.post('https://localhost:44346/api/Ticket',...newTicket,{headers:headers})
             .then(res=>{
                 console.log(res.data);
                 getTickets();
@@ -181,7 +186,8 @@ const ProjectPage = ({currentUser}) => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
-        axios.delete('http://192.168.0.102:8084/api/Ticket',{data:{id:ticket.id}, headers:headers})
+
+        axios.delete('https://localhost:44346/api/Ticket',{data:{id:ticket.id}, headers:headers})
             .then(res=>getTickets())
             .catch(error=>console.log(error));
      

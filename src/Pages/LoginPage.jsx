@@ -19,10 +19,9 @@ const LoginPage = () => {
          password:pasword
        }
        const headers = {
-         'Content-Type': 'application/json',
-         'Access-Control-Allow-Origin':'*'
+         'Content-Type': 'application/json'
        }
-       axios.post('http://192.168.0.102:8084/api/Account/Login',data,{headers:headers,withCredentials: true,})
+       axios.post('https://localhost:44346/api/Account/Login',data,{headers:headers,withCredentials: true,})
          .then(res=>{setRedirect(true);Cookies.set('Jwt',res.data)})
          .catch(error=>console.log(error))
    
