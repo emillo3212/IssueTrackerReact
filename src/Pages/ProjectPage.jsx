@@ -47,14 +47,12 @@ const ProjectPage = ({currentUser}) => {
       'Authorization': toke
     }
 
-        axios.get('https://localhost:44346/api/Project/'+id,{headers:headers})
+        axios.get('https://webapi20220214131752.azurewebsites.net/api/Project/'+id,{headers:headers})
             .then(res=>{
                 setProject({...res.data})
                 setUsersInProject([...res.data.users])
                 setTickets([...res.data.tickets])
-                console.log([res.data.tickets])
             }).catch(error=> setRedirect(true))
-            console.log(currentUser.projects)
     },[])
 
     const getTickets =()=>{
@@ -63,7 +61,7 @@ const ProjectPage = ({currentUser}) => {
           'Content-Type': 'application/json',
           'Authorization': toke
         }
-        axios.get('https://localhost:44346/api/Project/'+id,{headers:headers})
+        axios.get('https://webapi20220214131752.azurewebsites.net/api/Project/'+id,{headers:headers})
         .then(res=>{
             setTickets([...res.data.tickets])
         })
@@ -76,7 +74,7 @@ const ProjectPage = ({currentUser}) => {
           'Authorization': toke,
           'Access-Control-Allow-Origin':'*'
         }
-        axios.put('https://localhost:44346/api/Ticket',data,{headers:headers})
+        axios.put('https://webapi20220214131752.azurewebsites.net/api/Ticket',data,{headers:headers})
 
         .then(res=>getTickets())
             
@@ -89,7 +87,7 @@ const ProjectPage = ({currentUser}) => {
           'Authorization': toke
         }
 
-        axios.get('https://localhost:44346/api/User',{headers:headers})
+        axios.get('https://webapi20220214131752.azurewebsites.net/api/User',{headers:headers})
             .then(res=>{
                 
                 [...res.data].map(o=>{
@@ -100,7 +98,6 @@ const ProjectPage = ({currentUser}) => {
                             lastName:o.lastName
                         }
                     ]
-                   //console.log(u)
                     setUsers(users=>[...users,...u])
                 })      
             })
@@ -137,11 +134,9 @@ const ProjectPage = ({currentUser}) => {
         }
 
 
-        axios.put("https://localhost:44346/api/Project/",data,{headers:headers})
+        axios.put("https://webapi20220214131752.azurewebsites.net/api/Project/",data,{headers:headers})
             .then(res => {
-                console.log(res.data);
                 setUsersInProject([...usersInProject,...selectedUsers])
-            .catch(error => console.log(error))
             })
 
         setAddUserModal(!addUserModal)
@@ -155,9 +150,8 @@ const ProjectPage = ({currentUser}) => {
           'Authorization': toke
         }
 
-        axios.post('https://localhost:44346/api/Ticket',...newTicket,{headers:headers})
+        axios.post('https://webapi20220214131752.azurewebsites.net/api/Ticket',...newTicket,{headers:headers})
             .then(res=>{
-                console.log(res.data);
                 getTickets();
             }) .catch(error=>console.log(error));
        
@@ -177,7 +171,6 @@ const ProjectPage = ({currentUser}) => {
         setTicketModal(false)
     }
     const DeleteTicket = (ticket)=>{
-        console.log(ticket.id)
         var data={
             id:ticket.id
         }
@@ -187,7 +180,7 @@ const ProjectPage = ({currentUser}) => {
           'Authorization': toke
         }
 
-        axios.delete('https://localhost:44346/api/Ticket',{data:{id:ticket.id}, headers:headers})
+        axios.delete('https://webapi20220214131752.azurewebsites.net/api/Ticket',{data:{id:ticket.id}, headers:headers})
             .then(res=>getTickets())
             .catch(error=>console.log(error));
      

@@ -27,7 +27,6 @@ const CreateTicketModal = ({listaUsers,assignUser,addTicket}) => {
     if(activeUser!==user)
     {
       setActiveUser(user)
-      console.log(user)
     }
      
   }

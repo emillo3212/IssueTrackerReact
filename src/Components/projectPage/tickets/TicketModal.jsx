@@ -4,7 +4,6 @@ import './ticketModal.css'
 
 
 const TicketModal = ({ticket,doneTicket,DeleteTicket}) => {
-  console.log(ticket)
   return <div className='justify-content-md-center ticketModal'>
       <Col  className="ticketModalContent">
         <Row>
@@ -25,7 +24,8 @@ const TicketModal = ({ticket,doneTicket,DeleteTicket}) => {
               <div className="ticketModalAssignedTo">{ticket.assignTo.firstName} {ticket.assignTo.lastName}</div>
 
               <div className="priorityHeader">Priority</div>
-              <div className="ticketModalPriority">{ticket.priority}</div>
+              <div className="ticketModalPriority" 
+                style={{backgroundColor:(ticket.priority==="Low")?'#00b552':(ticket.priority==="High")?'#ff5f63':'#df9f1f'}}>{ticket.priority}</div>
           </Col>
         </Row>
        

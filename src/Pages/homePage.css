@@ -1,0 +1,19 @@
+.createProject {
+  background-color: #16a3db;
+  padding: 0px 20px 20px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 42px;
+  font-weight: bold;
+  height: 200px;
+  margin-top: 15px;
+}
+.createProject:hover {
+  background-color: #2bb4eb;
+  cursor: pointer;
+}

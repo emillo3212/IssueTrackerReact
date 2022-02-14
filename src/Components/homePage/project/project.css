@@ -6,21 +6,24 @@
   text-decoration: none;
   color: white;
   height: 200px;
+  margin-top: 15px;
+}
+.project:hover {
+  background-color: #292c2f;
 }
 .tittle {
   font-size: 24px;
   font-weight: bold;
   padding: 8px;
   border-bottom: 2px solid #1f2224;
- 
 }
-.description{
+.description {
   padding: 5px;
 }
 
-.ticket-HP{
+.ticket-HP {
   padding: 10px;
-  background-color:#282c30 ;
-  margin:5px;
+  background-color: #282c30;
+  margin: 5px;
   border-radius: 25px;
 }
