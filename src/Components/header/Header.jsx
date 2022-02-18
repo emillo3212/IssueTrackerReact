@@ -15,7 +15,17 @@ const Header =({currentUser})=> {
     return (
         <Nav className="navbar navbar-dark topBar mb-4">
             <Link to={"/"} className="logo">IssueTracker</Link>
-            {(Object.keys(currentUser).length!==0)&&<> <div  className='currentUser'><FaUser size={40} />{currentUser.firstName} {currentUser.lastName}<div onClick={()=>logout()} className='logout'>logout</div></div> </>}
+
+            {(Object.keys(currentUser).length!==0)&&<> <div className='currentUser'>
+                <FaUser size={40} /> <div className='userDropdown'>
+                            <div className='nav-user'>{currentUser.firstName} {currentUser.lastName}</div>
+                            {(currentUser.role.name==="admin")&&<Link to={"/admin"} className='nav-admin'>Admin Panel</Link>}
+
+                            <div onClick={()=>logout()} className='logout'>logout</div>
+                            
+                    </div>
+               
+            </div> </>}
             
         </Nav>
     )

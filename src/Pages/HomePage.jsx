@@ -14,15 +14,17 @@ const HomePage = ({currentUser}) => {
   const [users,setUsers]=useState([]);
   const [error,setError] = useState("");
   const [isError,setIsError] = useState(false);
+  //var Url = "https://webapi20220214131752.azurewebsites.net";
+  var Url="https://localhost:44346";
+
+  var headers = {
+    'Content-Type': 'application/json',
+    'Authorization': "Bearer"+" "+Cookies.get('Jwt')
+  }
 
   useEffect(()=>{
-    var toke = "Bearer"+" "+Cookies.get('Jwt')
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': toke
-    }
 
-    axios.get('https://webapi20220214131752.azurewebsites.net/api/User',{headers:headers})
+    axios.get(Url+'/api/User',{headers:headers})
         .then(res=>{
             
             [...res.data].map(o=>{
@@ -41,13 +43,8 @@ const HomePage = ({currentUser}) => {
   useEffect(()=>{
     var proje =currentUser.projects
     
-    var toke = "Bearer"+" "+Cookies.get('Jwt')
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': toke
-    }
     const fetchProjects = (id)=>{
-      axios.get('https://webapi20220214131752.azurewebsites.net/api/Project/'+id,{headers:headers,withCredentials:true})
+      axios.get(Url+'/api/Project/'+id,{headers:headers,withCredentials:true})
         .then(res=>setProjects(projects=>[...projects,res.data]))
       
     }
@@ -69,7 +66,7 @@ const HomePage = ({currentUser}) => {
       'Authorization': toke
     }
 
-    axios.post('https://webapi20220214131752.azurewebsites.net/api/Project',newProject,{headers:headers})
+    axios.post(Url+'/api/Project',newProject,{headers:headers})
         .then(res=>{
             window.location.href="/";
         }) .catch(error=>setError(error.response.data.Message));

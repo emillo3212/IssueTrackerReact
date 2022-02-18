@@ -14,6 +14,8 @@ const LoginPage = () => {
     const [isError,setIsError] = useState(false);
 
     const [redirect,setRedirect]=useState(false)
+    //var Url = "https://webapi20220214131752.azurewebsites.net";
+    var Url="https://localhost:44346";
   
     const login =()=>{
       var data={
@@ -23,7 +25,7 @@ const LoginPage = () => {
        const headers = {
          'Content-Type': 'application/json'
        }
-       axios.post('https://webapi20220214131752.azurewebsites.net/api/Account/Login',data,{headers:headers,withCredentials: true,})
+       axios.post(Url+'/api/Account/Login',data,{headers:headers,withCredentials: true,})
          .then(res=>{setRedirect(true);Cookies.set('Jwt',res.data,{expires:1});})
          .catch(error=>{setError(error.response.data.Message);setIsError(true)})
 
@@ -40,7 +42,7 @@ const LoginPage = () => {
        const headers = {
          'Content-Type': 'application/json'
        }
-       axios.post('https://webapi20220214131752.azurewebsites.net/api/Account/Login',data,{headers:headers,withCredentials: true,})
+       axios.post(Url+'/api/Account/Login',data,{headers:headers,withCredentials: true,})
          .then(res=>{setRedirect(true);Cookies.set('Jwt',res.data,{expires:1});})
          .catch(error=>{setError(error.response.data.Message);setIsError(true)})
 

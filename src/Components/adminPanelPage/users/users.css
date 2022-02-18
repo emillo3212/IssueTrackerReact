@@ -1,0 +1,53 @@
+.AP-users {
+  background-color: #24282b;
+  color: white;
+  border-radius: 25px;
+  padding: 20px;
+  max-height: 740px;
+}
+.AP-user {
+  background-color: #1f2224;
+  border-radius: 15px;
+  font-size: 18px;
+}
+.AP-user:hover {
+  cursor: pointer;
+  background-color: #262a2c;
+}
+.AP-usrsHeader {
+  font-size: 24px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #1f2224;
+  margin-bottom: 15px;
+}
+.AP-createUser {
+  background-color: #24282b;
+  border-radius: 25px;
+  color: white;
+}
+.AP-createUserInput {
+  font-size: 18px;
+  background-color: #1f2224;
+  color: white;
+  border-radius: 15px;
+  border: 0;
+  width: 100%;
+}
+.AP-inputHeader {
+  font-size: 20px;
+  padding: 5px;
+}
+.AP-createUser-Btn {
+  padding: 10px;
+  border-radius: 15px;
+  width: 100%;
+  background-color: #16a3db;
+  border: 0;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+.AP-message {
+  font-size: 18px;
+  color: #00ebb8;
+}

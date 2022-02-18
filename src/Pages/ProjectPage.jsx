@@ -34,20 +34,25 @@ const ProjectPage = ({currentUser}) => {
 
     const [createTicketModal,setCreateTicketModal] = useState(false)
 
+    const [addUserModal,setAddUserModal] = useState(false)
+    const [usersList,setUsersList] = useState([])
+
+    //var Url = "https://webapi20220214131752.azurewebsites.net";
+    var Url="https://localhost:44346";
+
+    var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer"+" "+Cookies.get('Jwt')
+      }
+
     useEffect(()=>{
 
-    if(currentUser.projects.includes(id))
-    {
-        setRedirect(true);
-    }
+        if(currentUser.projects.includes(id))
+        {
+            setRedirect(true);
+        }
 
-    var toke = "Bearer"+" "+Cookies.get('Jwt')
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': toke
-    }
-
-        axios.get('https://webapi20220214131752.azurewebsites.net/api/Project/'+id,{headers:headers})
+        axios.get(Url+'/api/Project/'+id,{headers:headers})
             .then(res=>{
                 setProject({...res.data})
                 setUsersInProject([...res.data.users])
@@ -56,38 +61,22 @@ const ProjectPage = ({currentUser}) => {
     },[])
 
     const getTickets =()=>{
-        var toke = "Bearer"+" "+Cookies.get('Jwt')
-        const headers = {
-          'Content-Type': 'application/json',
-          'Authorization': toke
-        }
-        axios.get('https://webapi20220214131752.azurewebsites.net/api/Project/'+id,{headers:headers})
+       
+        axios.get(Url+'/api/Project/'+id,{headers:headers})
         .then(res=>{
             setTickets([...res.data.tickets])
         })
     }
 
     const updateTickets = (data)=>{
-        var toke = "Bearer"+" "+Cookies.get('Jwt')
-        const headers = {
-          'Content-Type': 'application/json',
-          'Authorization': toke,
-          'Access-Control-Allow-Origin':'*'
-        }
-        axios.put('https://webapi20220214131752.azurewebsites.net/api/Ticket',data,{headers:headers})
+        axios.put(Url+'/api/Ticket',data,{headers:headers})
 
         .then(res=>getTickets())
             
     }
 
     useEffect(()=>{
-        var toke = "Bearer"+" "+Cookies.get('Jwt')
-        const headers = {
-          'Content-Type': 'application/json',
-          'Authorization': toke
-        }
-
-        axios.get('https://webapi20220214131752.azurewebsites.net/api/User',{headers:headers})
+        axios.get(Url+'/api/User',{headers:headers})
             .then(res=>{
                 
                 [...res.data].map(o=>{
@@ -127,14 +116,8 @@ const ProjectPage = ({currentUser}) => {
             id: id,
             users: us
         }
-        var toke = "Bearer"+" "+Cookies.get('Jwt')
-        const headers = {
-          'Content-Type': 'application/json',
-          'Authorization': toke
-        }
 
-
-        axios.put("https://webapi20220214131752.azurewebsites.net/api/Project/",data,{headers:headers})
+        axios.put(Url+"/api/Project/",data,{headers:headers})
             .then(res => {
                 setUsersInProject([...usersInProject,...selectedUsers])
             })
@@ -144,13 +127,7 @@ const ProjectPage = ({currentUser}) => {
     }
 
     function addTicket(newTicket){
-        var toke = "Bearer"+" "+Cookies.get('Jwt')
-        const headers = {
-          'Content-Type': 'application/json',
-          'Authorization': toke
-        }
-
-        axios.post('https://webapi20220214131752.azurewebsites.net/api/Ticket',...newTicket,{headers:headers})
+        axios.post(Url+'/api/Ticket',...newTicket,{headers:headers})
             .then(res=>{
                 getTickets();
             }) .catch(error=>console.log(error));
@@ -170,24 +147,50 @@ const ProjectPage = ({currentUser}) => {
         updateTickets(uTicket)
         setTicketModal(false)
     }
+
     const DeleteTicket = (ticket)=>{
         var data={
             id:ticket.id
         }
-        var toke = "Bearer"+" "+Cookies.get('Jwt')
-        const headers = {
-          'Content-Type': 'application/json',
-          'Authorization': toke
-        }
 
-        axios.delete('https://webapi20220214131752.azurewebsites.net/api/Ticket',{data:{id:ticket.id}, headers:headers})
+        axios.delete(Url+'/api/Ticket',{data:{id:ticket.id}, headers:headers})
             .then(res=>getTickets())
             .catch(error=>console.log(error));
      
         setTicketModal(!ticketModal)
     }
 
-    
+    function usersOutsideProject(a,b){
+        for(var i=0; i < a.length; i++) {
+            for(var j=0; j < b.length; j++) {
+                if(JSON.stringify(a[i])  == JSON.stringify(b[j])) {
+                    a.splice(i, 1);
+                }
+            }
+        }
+
+       return a
+    }
+
+    const showTicketModal = (ticket) =>{
+        setTicketModal(!ticketModal)
+        setTicket(ticket)
+    }
+
+    const showAddUserModal = () =>{
+        setAddUserModal(!addUserModal)
+        setUsersList([])
+    }
+
+    const showCreateTicketModal = () =>{
+        setCreateTicketModal(!createTicketModal)
+    }
+
+    const [userAssigned,setUserAssigned] = useState([])
+
+    const assignUser = (selectedUser) => {
+        setUserAssigned(selectedUser)
+    }
    
     const ticketRef = useRef()
 
@@ -212,48 +215,12 @@ const ProjectPage = ({currentUser}) => {
 
 
 
-    function usersOutsideProject(a,b){
-        for(var i=0; i < a.length; i++) {
-            for(var j=0; j < b.length; j++) {
-                if(JSON.stringify(a[i])  == JSON.stringify(b[j])) {
-                    a.splice(i, 1);
-                }
-            }
-        }
-
-       return a
-    }
-
-
-    const showTicketModal = (ticket) =>{
-        setTicketModal(!ticketModal)
-        setTicket(ticket)
-    } 
-
-    const [addUserModal,setAddUserModal] = useState(false)
-    const [usersList,setUsersList] = useState([])
-
-    const showAddUserModal = () =>{
-        setAddUserModal(!addUserModal)
-        setUsersList([])
-    }
-
-    const showCreateTicketModal = () =>{
-        setCreateTicketModal(!createTicketModal)
-    }
-
-    const [userAssigned,setUserAssigned] = useState([])
-
-    const assignUser = (selectedUser) => {
-        setUserAssigned(selectedUser)
-    }
-
     
-   
-   
+
+
     if(redirect)
     {
-        return <Redirect to="/"/>
+        //return <Redirect to="/"/>
     }
    
 

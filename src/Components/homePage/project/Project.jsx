@@ -5,7 +5,7 @@ import './project.css'
 
 const Project = ({project}) => {
     return (
-        <Link to={"/"+ project.id} style={{textDecoration:'none'}}>
+        <Link to={"/project/"+ project.id} style={{textDecoration:'none'}}>
             <div className="project">
                 <div className="tittle">{project.name}</div>
                 <div className="description"> 
