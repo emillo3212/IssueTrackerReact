@@ -18,8 +18,8 @@ const Users = () => {
 
   const [users,setUsers] = useState([]);
 
-
-  var Url="https://localhost:44346";
+  var Url = "https://webapi20220214131752.azurewebsites.net";
+  //var Url="https://localhost:44346";
   var headers = {
       'Content-Type': 'application/json',
       'Authorization': "Bearer"+" "+Cookies.get('Jwt')

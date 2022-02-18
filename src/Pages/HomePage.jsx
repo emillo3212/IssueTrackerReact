@@ -14,8 +14,8 @@ const HomePage = ({currentUser}) => {
   const [users,setUsers]=useState([]);
   const [error,setError] = useState("");
   const [isError,setIsError] = useState(false);
-  //var Url = "https://webapi20220214131752.azurewebsites.net";
-  var Url="https://localhost:44346";
+  var Url = "https://webapi20220214131752.azurewebsites.net";
+  //var Url="https://localhost:44346";
 
   var headers = {
     'Content-Type': 'application/json',

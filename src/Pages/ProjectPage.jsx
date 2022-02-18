@@ -37,8 +37,8 @@ const ProjectPage = ({currentUser}) => {
     const [addUserModal,setAddUserModal] = useState(false)
     const [usersList,setUsersList] = useState([])
 
-    //var Url = "https://webapi20220214131752.azurewebsites.net";
-    var Url="https://localhost:44346";
+    var Url = "https://webapi20220214131752.azurewebsites.net";
+    //var Url="https://localhost:44346";
 
     var headers = {
         'Content-Type': 'application/json',
