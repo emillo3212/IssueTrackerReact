@@ -6,6 +6,29 @@
   text-decoration: none;
   color: white;
   height: 200px;
+  margin-bottom: 20px;
+}
+.AP-projects {
+  background-color: #24282b;
+  border-radius: 25px;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+.AP-project {
+  background-color: #1f2224;
+  margin: auto;
+  border-radius: 25px;
+  text-decoration: none;
+  color: white;
+  margin-bottom: 20px;
+  padding: 10px;
+  float: left;
+}
+.AP-tittle {
+  font-size: 15px;
+  text-align: left;
   margin-top: 15px;
 }
 .project:hover {
@@ -26,4 +49,47 @@
   background-color: #282c30;
   margin: 5px;
   border-radius: 25px;
+}
+.AP-deleteProject {
+  color: #ff5e62;
+}
+.AP-deleteProject:hover {
+  cursor: pointer;
+  color: #ce4749;
+}
+.warming {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  font-size: 26px;
+  padding: 25px;
+  color: red;
+  background-color: black;
+  width: 450px;
+  height: 195px;
+  border-radius: 25px;
+}
+.AP-yesBtn {
+  height: 50px;
+  width: 150px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #ff5e62;
+  border: 0;
+  border-radius: 25px;
+  color: white;
+}
+.AP-noBtn {
+  margin: 20px 0px 0px 30px;
+  height: 50px;
+  width: 150px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #00a3ff;
+  border: 0;
+  border-radius: 25px;
+  color: white;
 }

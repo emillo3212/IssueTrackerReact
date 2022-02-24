@@ -74,9 +74,9 @@ const Users = () => {
   }
 
   return (<div style={{paddingLeft:330}}>
-    <Row>
+    <Row className='justify-content-center'>
 
-      <Col md={6}  className='AP-users'>
+      <Col md={10} xl={6}  className='AP-users'>
         <Row className='justify-content-center'>
               <Col className="AP-usrsHeader">Users</Col>
       
@@ -89,7 +89,7 @@ const Users = () => {
         </Row>
       </Col>
 
-      <Col md={4} xl={3} className='AP-createUser mx-5 p-4'>
+      <Col md={7} xl={3} className='AP-createUser mx-5 p-4'>
         <Row className='justify-content-center'>
             {(isError)&&<Row>
                 <div className='error'>{error}</div>

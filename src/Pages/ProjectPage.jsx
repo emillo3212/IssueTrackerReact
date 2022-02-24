@@ -37,6 +37,9 @@ const ProjectPage = ({currentUser}) => {
     const [addUserModal,setAddUserModal] = useState(false)
     const [usersList,setUsersList] = useState([])
 
+    const [isError,setIsError] = useState(false);
+    const [message,setMessage] = useState('');
+
     var Url = "https://webapi20220214131752.azurewebsites.net";
     //var Url="https://localhost:44346";
 
@@ -155,7 +158,7 @@ const ProjectPage = ({currentUser}) => {
 
         axios.delete(Url+'/api/Ticket',{data:{id:ticket.id}, headers:headers})
             .then(res=>getTickets())
-            .catch(error=>console.log(error));
+            .catch(error=>{setIsError(!isError);setMessage(error.response.data.Message)});
      
         setTicketModal(!ticketModal)
     }
@@ -269,7 +272,9 @@ const ProjectPage = ({currentUser}) => {
                 {(createTicketModal)&& <div ref={ticketRef}><CreateTicketModal listaUsers={usersInProject} assignUser={assignUser} addTicket={addTicket}/></div>}
             </Row>
                
-           
+            {isError&&<div className='warming'> {message} <br/>
+                  <button onClick={()=>setIsError(false)}>ok</button>
+                </div>}
         </Container>
        
     )

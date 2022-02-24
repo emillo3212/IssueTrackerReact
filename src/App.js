@@ -18,8 +18,8 @@ const App = () => {
   const [redirect,setRedirect]= useState(false);
   const [isLoading,SetIsLoading] = useState(true);
   const [loggedin,setLoggedin]=  useState(false);
-   //var Url = "https://webapi20220214131752.azurewebsites.net";
-   var Url="https://localhost:44346";
+   var Url = "https://webapi20220214131752.azurewebsites.net";
+   //var Url="https://localhost:44346";
 
   useEffect(()=>{
     var toke = "Bearer"+" "+Cookies.get('Jwt');

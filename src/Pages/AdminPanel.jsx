@@ -13,7 +13,7 @@ import { Redirect } from 'react-router-dom'
 const AdminPanel = ({userRole}) => {
 
   useEffect(()=>{
-    if(userRole!=="admin"){
+    if(userRole==="user"){
       window.location.href="/"
     }
   },[])

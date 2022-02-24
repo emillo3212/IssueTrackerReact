@@ -94,7 +94,13 @@ const HomePage = ({currentUser}) => {
     })
 
   return <Container>
-    <Projects createNewProject={createNewProject} projects={projects} />
+    <Row>
+      <Projects projects={projects} />
+      <div onClick={()=>createNewProject()} className='col-4 createProject'>
+                  Create project
+      </div>
+    </Row>
+   
     {(createProjectModal)&&<div ref={projectRef}><CreateProjectModal users={users} AddNewProject={AddNewProject} currentUser={currentUser} error={error}/></div>}
   </Container>
 

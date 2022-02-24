@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 import './project.css'
 
 const Project = ({project}) => {
+    if(project===null){
+        window.location.href="/"
+    }
     return (
         <Link to={"/project/"+ project.id} style={{textDecoration:'none'}}>
             <div className="project">
